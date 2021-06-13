@@ -24,11 +24,11 @@ const navigationConfig = [
 			},
 			{
 				id: 'customers',
-				title: 'Customers',
+				title: 'New Customers',
 				translate: 'CUSTOMERS',
 				type: 'item',
 				icon: 'whatshot',
-				url: '/customers'
+				url: '/customer/new'
 			},
 
 		 
