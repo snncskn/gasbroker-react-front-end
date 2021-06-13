@@ -1,0 +1,2 @@
+# Kurulum
+'npm install'
