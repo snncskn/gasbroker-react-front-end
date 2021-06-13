@@ -5,7 +5,6 @@ import tr from './navigation-i18n/tr';
 
 i18next.addResourceBundle('en', 'navigation', en);
 i18next.addResourceBundle('tr', 'navigation', tr);
-i18next.addResourceBundle('ar', 'navigation', ar);
 
 const navigationConfig = [
 	{
@@ -16,7 +15,7 @@ const navigationConfig = [
 		icon: 'apps',
 		children: [
 			{
-				id: 'example-component',
+				id: 'users',
 				title: 'Users',
 				translate: 'USERS',
 				type: 'item',
@@ -32,14 +31,7 @@ const navigationConfig = [
 				url: '/customers'
 			},
 
-			{
-				id: 'example-component',
-				title: 'Example',
-				translate: 'EXAMPLE',
-				type: 'item',
-				icon: 'whatshot',
-				url: '/example'
-			}
+		 
 		]
 	}
 ];

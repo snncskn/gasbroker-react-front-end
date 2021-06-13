@@ -19,12 +19,8 @@ const languages = [
 		id: 'tr',
 		title: 'Turkish',
 		flag: 'tr'
-	},
-	{
-		id: 'ar',
-		title: 'Arabic',
-		flag: 'sa'
 	}
+ 
 ];
 
 function LanguageSwitcher(props) {
