@@ -1,7 +1,7 @@
 import { Redirect } from 'react-router-dom';
 import FuseUtils from '@fuse/utils';
 import UserConfig from 'app/gas/auth/UserConfig';
-import CustomerConfig from 'app/gas/customer/CustomerConfig';
+import CustomerConfig from 'app/gas/CustomerConfig';
 
 const routeConfigs = [UserConfig,CustomerConfig];
 
