@@ -1,2 +1,2 @@
 # Kurulum
-'npm install'
+'npm install --force'
