@@ -17,6 +17,23 @@ const navigationConfig = [
 		children: [
 			{
 				id: 'example-component',
+				title: 'Users',
+				translate: 'USERS',
+				type: 'item',
+				icon: 'whatshot',
+				url: '/user'
+			},
+			{
+				id: 'customers',
+				title: 'Customers',
+				translate: 'CUSTOMERS',
+				type: 'item',
+				icon: 'whatshot',
+				url: '/customers'
+			},
+
+			{
+				id: 'example-component',
 				title: 'Example',
 				translate: 'EXAMPLE',
 				type: 'item',
