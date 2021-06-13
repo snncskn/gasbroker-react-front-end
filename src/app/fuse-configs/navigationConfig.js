@@ -25,7 +25,7 @@ const navigationConfig = [
 			{
 				id: 'customers',
 				title: 'New Customers',
-				translate: 'CUSTOMERS',
+				translate: 'NEW_CUSTOMERS',
 				type: 'item',
 				icon: 'whatshot',
 				url: '/customer/new'

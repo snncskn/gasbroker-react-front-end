@@ -20,13 +20,13 @@ function CustomerHeader(props) {
 	const theme = useTheme();
 	const history = useHistory();
 
-	function handleSaveProduct() {
-		dispatch(saveProduct(getValues()));
+	function handleSaveCustomer() {
+		dispatch(saveCustomer(getValues()));
 	}
 
-	function handleRemoveProduct() {
-		dispatch(removeProduct()).then(() => {
-			history.push('/apps/e-commerce/products');
+	function handleRemoveCustomer() {
+		dispatch(removeCustomer()).then(() => {
+			history.push('/apps/e-commerce/customers');
 		});
 	}
 
@@ -38,11 +38,11 @@ function CustomerHeader(props) {
 						className="flex items-center sm:mb-12"
 						component={Link}
 						role="button"
-						to="/apps/e-commerce/products"
+						to="/apps/e-commerce/customers"
 						color="inherit"
 					>
 						<Icon className="text-20">{theme.direction === 'ltr' ? 'arrow_back' : 'arrow_forward'}</Icon>
-						<span className="hidden sm:flex mx-4 font-medium">Products</span>
+						<span className="hidden sm:flex mx-4 font-medium">Customers</span>
 					</Typography>
 				</motion.div>
 
@@ -54,7 +54,7 @@ function CustomerHeader(props) {
 								{name || 'New Customer'}
 							</Typography>
 							<Typography variant="caption" className="font-medium">
-								Product Detail
+								Customer Detail
 							</Typography>
 						</motion.div>
 					</div>
@@ -69,7 +69,7 @@ function CustomerHeader(props) {
 					className="whitespace-nowrap mx-4"
 					variant="contained"
 					color="secondary"
-					onClick={handleRemoveProduct}
+					onClick={handleRemoveCustomer}
 					startIcon={<Icon className="hidden sm:flex">delete</Icon>}
 				>
 					Remove
@@ -79,7 +79,7 @@ function CustomerHeader(props) {
 					variant="contained"
 					color="secondary"
 					disabled={_.isEmpty(dirtyFields) || !isValid}
-					onClick={handleSaveProduct}
+					onClick={handleSaveCustomer}
 				>
 					Save
 				</Button>
