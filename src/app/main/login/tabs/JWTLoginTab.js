@@ -16,7 +16,6 @@ import _ from '@lodash';
  * Form Validation Schema
  */
 const schema = yup.object().shape({
-	email: yup.string().email('You must enter a valid email').required('You must enter a email'),
 	password: yup
 		.string()
 		.required('Please enter your password.')
@@ -70,9 +69,7 @@ function JWTLoginTab(props) {
 							{...field}
 							className="mb-16"
 							type="text"
-							error={!!errors.email}
-							helperText={errors?.email?.message}
-							label="Email"
+							label="Username"
 							InputProps={{
 								endAdornment: (
 									<InputAdornment position="end">

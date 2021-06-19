@@ -59,13 +59,12 @@ class JwtService extends FuseUtils.EventEmitter {
 	};
 
 	signInWithEmailAndPassword = (email, password) => {
+		console.log(email,password);
 		return new Promise((resolve, reject) => {
 			axios
-				.get(process.env.REACT_APP_API_URL+'/api/auth', {
-					data: {
-						email,
+				.post(process.env.REACT_APP_API_URL+'/auth/signin', {
+						username:email,
 						password
-					}
 				})
 				.then(response => {
 					if (response.data.user) {
@@ -74,6 +73,10 @@ class JwtService extends FuseUtils.EventEmitter {
 					} else {
 						reject(response.data.error);
 					}
+				}).catch(error => {
+					console.log(error);
+					reject([{type:'password',message:error.message}]);
+
 				});
 		});
 	};
