@@ -16,7 +16,13 @@ const CustomerConfig = {
 		{
 			path: '/customer',
 			component: lazy(() => import('./customer/Customer'))
+		},
+		{
+			path: '/customers',
+			component: lazy(() => import('./customers/Customers'))
 		}
+
+		
 
 	]
 };

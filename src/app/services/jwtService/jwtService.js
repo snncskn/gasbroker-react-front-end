@@ -1,17 +1,24 @@
 import FuseUtils from '@fuse/utils/FuseUtils';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import settings from './settings';
 /* eslint-disable camelcase */
 
 class JwtService extends FuseUtils.EventEmitter {
 	init() {
+		console.log(12312312);
 		this.setInterceptors();
 		this.handleAuthentication();
 	}
 
 	setInterceptors = () => {
+		console.log(999999);
 		axios.interceptors.response.use(
 			response => {
+				console.log(123);
+				const jwt_access_token = localStorage.getItem('jwt_access_token');
+				response.headers.Authorization = `Bearer ${jwt_access_token}`;
+				//x-access-token
 				return response;
 			},
 			err => {
@@ -59,7 +66,7 @@ class JwtService extends FuseUtils.EventEmitter {
 	};
 
 	signInWithEmailAndPassword = (email, password) => {
-		console.log(email,password);
+
 		return new Promise((resolve, reject) => {
 			axios
 				.post(process.env.REACT_APP_API_URL+'/auth/signin', {
@@ -67,11 +74,26 @@ class JwtService extends FuseUtils.EventEmitter {
 						password
 				})
 				.then(response => {
-					if (response.data.user) {
-						this.setSession(response.data.access_token);
-						resolve(response.data.user);
+					console.log(response);
+					if (response.data) {
+						this.setSession(response.data.accessToken);
+						
+						response.uuid = 'XgbuVEXBU6gtSKdbTYR1Zbbby1i3';
+						response.from = 'custom-db';
+						response.password = 'staff';
+						response.role = 'staff';
+						response.data.photoURL = 'assets/images/avatars/Arnold.jpg';
+						response.data.email = 'staff@fusetheme.com';
+		
+						response.data.redirectUrl ='http://localhost:3000/customers';
+						response.data.data = {
+							displayName: 'Arnold Matlock',
+							shortcuts: ['calendar', 'mail', 'contacts', 'todo']
+						};
+						response.data.data.settings= settings;
+						resolve(response.data);
 					} else {
-						reject(response.data.error);
+						reject(response.data);
 					}
 				}).catch(error => {
 					console.log(error);

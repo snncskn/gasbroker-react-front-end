@@ -20,7 +20,7 @@ export const removeCustomers = createAsyncThunk(
 const customersAdapter = createEntityAdapter({});
 
 export const { selectAll: selectOrders, selectById: selectOrderById } = customersAdapter.getSelectors(
-	state => state.eCommerceApp.orders
+	state => state.gas.customers
 );
 
 const customersSlice = createSlice({

@@ -78,6 +78,7 @@ export const setUserData = user => async (dispatch, getState) => {
 		redirectUrl: user.redirectUrl // for example 'apps/academy'
 	};
 
+
 	/*
     Set User Settings
      */

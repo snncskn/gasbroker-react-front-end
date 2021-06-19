@@ -19,7 +19,7 @@ export const saveCustomer = createAsyncThunk('gas/customer/saveCustomer', async 
 export const removeCustomer = createAsyncThunk(
 	'gas/customer/removeCustomer',
 	async (val, { dispatch, getState }) => {
-		const { id } = getState().eCommerceApp.product;
+		const { id } = getState().gas.product;
 		await axios.post('/api/e-commerce-app/remove-customer', { id });
 
 		return id;

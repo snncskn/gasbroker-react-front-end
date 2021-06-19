@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const getOrders = createAsyncThunk('gas/customers/getCustomers', async () => {
-	const response = await axios.get('/api/e-commerce-app/customers');
+export const getCustomers = createAsyncThunk('gas/customers/getCustomers', async () => {
+	console.log(123);
+	const response = await axios.get(process.env.REACT_APP_API_URL+'/company');
 	const data = await response.data;
 
-	return data;
+	return data.body;
 });
 
 export const removeCustomers = createAsyncThunk(
@@ -29,7 +30,7 @@ const customersSlice = createSlice({
 		searchText: ''
 	}),
 	reducers: {
-		setOrdersSearchText: {
+		setCustomerSearchText: {
 			reducer: (state, action) => {
 				state.searchText = action.payload;
 			},
@@ -37,11 +38,11 @@ const customersSlice = createSlice({
 		}
 	},
 	extraReducers: {
-		[getOrders.fulfilled]: customersAdapter.setAll,
+		[getCustomers.fulfilled]: customersAdapter.setAll,
 		[removeCustomers.fulfilled]: (state, action) => customersAdapter.removeMany(state, action.payload)
 	}
 });
 
-export const { setOrdersSearchText } = customersSlice.actions;
+export const { setCustomersSearchText } = customersSlice.actions;
 
 export default customersSlice.reducer;

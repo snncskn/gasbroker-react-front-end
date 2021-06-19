@@ -75,7 +75,7 @@ function UserForm(){
                 classes={{ root: 'w-full h-64' }}
             >
                 <Tab className="h-64" label="Order Details" />
-                <Tab className="h-64" label="Products" />
+                <Tab className="h-64" label="Customers" />
                 <Tab className="h-64" label="Invoice" />
             </Tabs>
         }
