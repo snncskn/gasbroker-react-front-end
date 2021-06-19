@@ -15,7 +15,10 @@ import AppContext from './AppContext';
 import { Auth } from './auth';
 import routes from './fuse-configs/routesConfig';
 import store from './store';
+import * as dotenv from "dotenv";
+dotenv.config();
 
+ 
 const jss = create({
 	...jssPreset(),
 	plugins: [...jssPreset().plugins, jssExtend(), rtl()],

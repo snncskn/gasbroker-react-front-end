@@ -114,6 +114,7 @@
         "autoprefixer": "9.8.6",
         "babel-eslint": "10.1.0",
         "cross-env": "7.0.3",
+        "dotenv": "^8.2.0",
         "eslint": "7.19.0",
         "eslint-config-airbnb": "^18.2.1",
         "eslint-config-prettier": "^7.2.0",
@@ -134,7 +135,8 @@
         "tailwindcss-dir": "4.0.0"
     },
     "scripts": {
-        "start": "craco start",
+        "start": "craco start  set API_URL=http://localhost:3300",
+        "dev": "craco start .env.development",
         "build": "cross-env GENERATE_SOURCEMAP=false craco build",
         "test": "craco test --env=node",
         "eject": "craco eject",

@@ -2,8 +2,9 @@ import { Redirect } from 'react-router-dom';
 import FuseUtils from '@fuse/utils';
 import UserConfig from 'app/gas/auth/UserConfig';
 import CustomerConfig from 'app/gas/CustomerConfig';
+import LoginConfig from 'app/main/login/LoginConfig';
 
-const routeConfigs = [UserConfig,CustomerConfig];
+const routeConfigs = [UserConfig, CustomerConfig, LoginConfig];
 
 const routes = [
 	// if you want to make whole app auth protected by default change defaultAuth for example:
