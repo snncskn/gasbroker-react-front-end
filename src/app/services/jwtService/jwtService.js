@@ -14,6 +14,8 @@ class JwtService extends FuseUtils.EventEmitter {
 	setInterceptors = () => {
 		axios.interceptors.response.use(
 			response => {
+				const jwt_access_token = localStorage.getItem('jwt_access_token');
+				response.headers.common['x-access-token'] = `${jwt_access_token}`;
 				return response;
 			},
 			err => {
