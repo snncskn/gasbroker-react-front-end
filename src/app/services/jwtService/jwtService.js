@@ -1,24 +1,19 @@
 import FuseUtils from '@fuse/utils/FuseUtils';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import settings from './settings';
 /* eslint-disable camelcase */
+
+const BASEURL = process.env.REACT_APP_API_URL
 
 class JwtService extends FuseUtils.EventEmitter {
 	init() {
-		console.log(12312312);
 		this.setInterceptors();
 		this.handleAuthentication();
 	}
 
 	setInterceptors = () => {
-		console.log(999999);
 		axios.interceptors.response.use(
 			response => {
-				console.log(123);
-				const jwt_access_token = localStorage.getItem('jwt_access_token');
-				response.headers.Authorization = `Bearer ${jwt_access_token}`;
-				//x-access-token
 				return response;
 			},
 			err => {
@@ -66,39 +61,19 @@ class JwtService extends FuseUtils.EventEmitter {
 	};
 
 	signInWithEmailAndPassword = (email, password) => {
-
 		return new Promise((resolve, reject) => {
 			axios
-				.post(process.env.REACT_APP_API_URL+'/auth/signin', {
-						username:email,
+				.post(BASEURL + '/api/auth/signin', {
+					email,
 						password
 				})
 				.then(response => {
-					console.log(response);
-					if (response.data) {
-						this.setSession(response.data.accessToken);
-						
-						response.uuid = 'XgbuVEXBU6gtSKdbTYR1Zbbby1i3';
-						response.from = 'custom-db';
-						response.password = 'staff';
-						response.role = 'staff';
-						response.data.photoURL = 'assets/images/avatars/Arnold.jpg';
-						response.data.email = 'staff@fusetheme.com';
-		
-						response.data.redirectUrl ='http://localhost:3000/customers';
-						response.data.data = {
-							displayName: 'Arnold Matlock',
-							shortcuts: ['calendar', 'mail', 'contacts', 'todo']
-						};
-						response.data.data.settings= settings;
-						resolve(response.data);
+					if (response.data.user) {
+						this.setSession(response.data.access_token);
+						-						resolve(response.data.user);
 					} else {
-						reject(response.data);
+						reject(response.data.error);
 					}
-				}).catch(error => {
-					console.log(error);
-					reject([{type:'password',message:error.message}]);
-
 				});
 		});
 	};
@@ -106,10 +81,8 @@ class JwtService extends FuseUtils.EventEmitter {
 	signInWithToken = () => {
 		return new Promise((resolve, reject) => {
 			axios
-				.get('/api/auth/access-token', {
-					data: {
-						access_token: this.getAccessToken()
-					}
+				.post(BASEURL + '/api/auth/access-token', {
+					access_token: this.getAccessToken()
 				})
 				.then(response => {
 					if (response.data.user) {
@@ -136,10 +109,10 @@ class JwtService extends FuseUtils.EventEmitter {
 	setSession = access_token => {
 		if (access_token) {
 			localStorage.setItem('jwt_access_token', access_token);
-			axios.defaults.headers.common.Authorization = `Bearer ${access_token}`;
+			axios.defaults.headers.common['x-access-token'] = `${access_token}`;
 		} else {
 			localStorage.removeItem('jwt_access_token');
-			delete axios.defaults.headers.common.Authorization;
+			delete axios.defaults.headers.common['x-access-token'];
 		}
 	};
 
