@@ -41,7 +41,7 @@ function JWTLoginTab(props) {
 	const [showPassword, setShowPassword] = useState(false);
 
 	useEffect(() => {
-		setValue('email', 'sinan', { shouldDirty: true, shouldValidate: true });
+		setValue('email', 'cihan@kaya.com', { shouldDirty: true, shouldValidate: true });
 		setValue('password', '123qwe', { shouldDirty: true, shouldValidate: true });
 	}, [reset, setValue, trigger]);
 
@@ -69,7 +69,7 @@ function JWTLoginTab(props) {
 							{...field}
 							className="mb-16"
 							type="text"
-							label="Username"
+							label="Email*"
 							InputProps={{
 								endAdornment: (
 									<InputAdornment position="end">
