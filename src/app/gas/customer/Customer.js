@@ -28,10 +28,15 @@ import AddressTab from './tabs/AddressTab';
  * Form Validation Schema
  */
 const schema = yup.object().shape({
-	name: yup
+	company_name: yup
 		.string()
-		.required('You must enter a product name')
-		.min(5, 'The product name must be at least 5 characters')
+		.required('You must enter a company name')
+		.min(5, 'The company name must be at least 5 characters'),
+	full_company_name: yup
+		.string()
+		.required('You must enter a company name')
+		.min(5, 'The company name must be at least 5 characters'),
+		
 });
 
 function Customer(props) {
@@ -70,7 +75,7 @@ function Customer(props) {
 		updateCustomerState();
 	}, [dispatch, routeParams]);
 
-	useEffect(() => {
+	useEffect(() => { 
 		if (!customer) {
 			return;
 		}
@@ -115,7 +120,7 @@ function Customer(props) {
 	/**
 	 * Wait while product data is loading and form is setted
 	 */
-	if (_.isEmpty(form) || (customer && routeParams.customerId !== customer.id && routeParams.customerId !== 'new')) {
+	if (_.isEmpty(form) || (customer && routeParams.customerId !== customer.company_id && routeParams.customerId !== 'new')) {
 		return <FuseLoading />;
 	}
 

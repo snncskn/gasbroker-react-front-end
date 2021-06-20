@@ -21,12 +21,15 @@ function CustomerHeader(props) {
 	const history = useHistory();
 
 	function handleSaveCustomer() {
-		dispatch(saveCustomer(getValues()));
+		dispatch(saveCustomer(getValues())).then(() => {
+			history.push('/customers');
+		});
+		 
 	}
 
 	function handleRemoveCustomer() {
 		dispatch(removeCustomer()).then(() => {
-			history.push('/apps/e-commerce/customers');
+			history.push('/customers');
 		});
 	}
 
@@ -38,7 +41,7 @@ function CustomerHeader(props) {
 						className="flex items-center sm:mb-12"
 						component={Link}
 						role="button"
-						to="/apps/e-commerce/customers"
+						to="/customers"
 						color="inherit"
 					>
 						<Icon className="text-20">{theme.direction === 'ltr' ? 'arrow_back' : 'arrow_forward'}</Icon>

@@ -39,7 +39,7 @@ function CustomersTable(props) {
 
 	useEffect(() => {
 		if (searchText.length !== 0) {
-			setData(_.filter(customers, item => item.name.toLowerCase().includes(searchText.toLowerCase())));
+			setData(_.filter(customers, item => item.full_company_name.toLowerCase().includes(searchText.toLowerCase())));
 			setPage(0);
 		} else {
 			setData(customers);
@@ -73,10 +73,11 @@ function CustomersTable(props) {
 	}
 
 	function handleClick(item) {
-		props.history.push(`/apps/e-commerce/products/${item.company_id}/${item.handle}`);
+		props.history.push(`/customer/${item.company_id}`);
 	}
 
 	function handleCheck(event, id) {
+		console.log('handleCheck');
 		const selectedIndex = selected.indexOf(id);
 		let newSelected = [];
 
@@ -104,7 +105,6 @@ function CustomersTable(props) {
 	if (loading) {
 		return <FuseLoading />;
 	}
-
 	if (data.length === 0) {
 		return (
 			<motion.div
@@ -167,7 +167,7 @@ function CustomersTable(props) {
 										</TableCell> 
 
 										<TableCell className="p-4 md:p-16" component="th" scope="row" align="right">
-											{n.active ? (
+											{n.is_active ? (
 												<Icon className="text-green text-20">check_circle</Icon>
 											) : (
 												<Icon className="text-red text-20">remove_circle</Icon>

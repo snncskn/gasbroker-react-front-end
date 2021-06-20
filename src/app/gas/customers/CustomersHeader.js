@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { selectMainTheme } from 'app/store/fuse/settingsSlice';
-import { setCustomerSearchText } from '../store/customersSlice';
+import { setCustomersSearchText } from '../store/customersSlice';
 
 function CustomersHeader(props) {
 	const dispatch = useDispatch();
@@ -64,7 +64,7 @@ function CustomersHeader(props) {
 			<motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0, transition: { delay: 0.2 } }}>
 				<Button
 					component={Link}
-					to="/apps/e-commerce/products/new"
+					to="/customer/new"
 					className="whitespace-nowrap"
 					variant="contained"
 					color="secondary"
