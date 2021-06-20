@@ -136,16 +136,7 @@ function CustomersTable(props) {
 						{_.orderBy(
 							data,
 							[
-								o => {
-									switch (customer.company_id) {
-										case 'categories': {
-											return o.categories[0];
-										}
-										default: {
-											return o[customer.company_id];
-										}
-									}
-								}
+							 
 							],
 							[customer.direction]
 						)
@@ -172,7 +163,7 @@ function CustomersTable(props) {
 										</TableCell>
 
 										<TableCell className="p-4 md:p-16" component="th" scope="row">
-											{n.company_name}
+											{n.full_company_name}
 										</TableCell> 
 
 										<TableCell className="p-4 md:p-16" component="th" scope="row" align="right">

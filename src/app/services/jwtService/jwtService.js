@@ -6,16 +6,13 @@ import settings from './settings';
 
 class JwtService extends FuseUtils.EventEmitter {
 	init() {
-		console.log(12312312);
 		this.setInterceptors();
 		this.handleAuthentication();
 	}
 
 	setInterceptors = () => {
-		console.log(999999);
 		axios.interceptors.response.use(
 			response => {
-				console.log(123);
 				const jwt_access_token = localStorage.getItem('jwt_access_token');
 				response.headers.Authorization = `Bearer ${jwt_access_token}`;
 				//x-access-token
@@ -86,11 +83,6 @@ class JwtService extends FuseUtils.EventEmitter {
 						response.data.email = 'staff@fusetheme.com';
 		
 						response.data.redirectUrl ='http://localhost:3000/customers';
-						response.data.data = {
-							displayName: 'Arnold Matlock',
-							shortcuts: ['calendar', 'mail', 'contacts', 'todo']
-						};
-						response.data.data.settings= settings;
 						resolve(response.data);
 					} else {
 						reject(response.data);
