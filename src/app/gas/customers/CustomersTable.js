@@ -39,9 +39,11 @@ function CustomersTable(props) {
 
 	useEffect(() => {
 		if (searchText.length !== 0) {
-			setData(_.filter(customers, item => item.full_company_name.toLowerCase().includes(searchText.toLowerCase())));
+			//setData(_.filter(customers, item => item.full_company_name.toLowerCase().includes(searchText.toLowerCase())));
+			setData(customers);
 			setPage(0);
 		} else {
+			console.log(customers);
 			setData(customers);
 		}
 	}, [customers, searchText]);
