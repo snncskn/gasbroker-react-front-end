@@ -2,7 +2,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import { Controller, useFormContext } from 'react-hook-form';
 
-function PricingTab(props) {
+function DocumentTab(props) {
 	const methods = useFormContext();
 	const { control } = methods;
 
@@ -89,4 +89,4 @@ function PricingTab(props) {
 	);
 }
 
-export default PricingTab;
+export default DocumentTab;
