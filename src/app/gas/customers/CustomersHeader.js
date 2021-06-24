@@ -33,7 +33,7 @@ function CustomersHeader(props) {
 					delay={300}
 					className="hidden sm:flex text-16 md:text-24 mx-12 font-semibold"
 				>
-					Customers
+					Customer list
 				</Typography>
 			</div>
 

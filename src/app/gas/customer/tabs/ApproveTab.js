@@ -1,16 +1,15 @@
-import { AccordionSummary, Accordion } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { Controller, useFormContext } from 'react-hook-form';
 
-function AddressTab(props) {
+function ApproveTab(props) {
 	const methods = useFormContext();
 	const { control } = methods;
 
 	return (
 		<div>
-
+		 adressasdas
 		</div>
 	);
 }
 
-export default AddressTab;
+export default ApproveTab;

@@ -19,10 +19,11 @@ import reducer from '../store';
 import CustomerHeader from './CustomerHeader';
 import BasicInfoTab from './tabs/BasicInfoTab';
 
-import PricingTab from './tabs/PricingTab';
-import ProductImagesTab from './tabs/ProductImagesTab';
+import PricingTab from './tabs/DocumentTab'; 
 import ShippingTab from './tabs/ShippingTab';
 import AddressTab from './tabs/AddressTab';
+import DocumentTab from './tabs/DocumentTab';
+import ApproveTab from './tabs/ApproveTab';
 
 /**
  * Form Validation Schema
@@ -142,11 +143,11 @@ function Customer(props) {
 						scrollButtons="auto"
 						classes={{ root: 'w-full h-64' }}
 					>
-						<Tab className="h-64" label="Basic Info" />
-						<Tab className="h-64" label="Product Images" />
-						<Tab className="h-64" label="Pricing" />
-						<Tab className="h-64" label="Inventory" />
-						<Tab className="h-64" label="Shipping" />
+						<Tab className="h-64" label="Genel Bilgiler" />
+						<Tab className="h-64" label="Adres" />
+						<Tab className="h-64" label="Evrak Listesi" />
+						<Tab className="h-64" label="Onay Süreçleri" />
+						<Tab className="h-64" label="Kullanıcı Bilgileri" />
 					</Tabs>
 				}
 				content={
@@ -156,15 +157,15 @@ function Customer(props) {
 						</div>
 
 						<div className={tabValue !== 1 ? 'hidden' : ''}>
-
+						<AddressTab />
 						</div>
 
 						<div className={tabValue !== 2 ? 'hidden' : ''}>
-							<PricingTab />
+							<DocumentTab />
 						</div>
 
 						<div className={tabValue !== 3 ? 'hidden' : ''}>
-							<AddressTab />
+							<ApproveTab />
 						</div>
 
 						<div className={tabValue !== 4 ? 'hidden' : ''}>
