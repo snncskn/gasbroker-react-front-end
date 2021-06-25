@@ -83,7 +83,7 @@ export const setUserData = user => async (dispatch, getState) => {
     Set User Settings
      */
 	//	TODO settings gelince bunu aç
-	dispatch(setDefaultSettings(user.settings));
+	//dispatch(setDefaultSettings(user.settings));
 
 	dispatch(setUser(user));
 };
