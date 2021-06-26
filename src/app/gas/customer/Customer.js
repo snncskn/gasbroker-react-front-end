@@ -19,7 +19,7 @@ import reducer from '../store';
 import CustomerHeader from './CustomerHeader';
 import BasicInfoTab from './tabs/BasicInfoTab';
 
-import PricingTab from './tabs/DocumentTab'; 
+import PricingTab from './tabs/DocumentTab';
 import ShippingTab from './tabs/ShippingTab';
 import AddressTab from './tabs/AddressTab';
 import DocumentTab from './tabs/DocumentTab';
@@ -29,15 +29,14 @@ import ApproveTab from './tabs/ApproveTab';
  * Form Validation Schema
  */
 const schema = yup.object().shape({
-	company_name: yup
+	full_name: yup
 		.string()
-		.required('You must enter a company name')
-		.min(5, 'The company name must be at least 5 characters'),
-	full_company_name: yup
+		.required('You must enter the full company name')
+		.min(5, 'The full company name must be at least 5 characters'),
+	name: yup
 		.string()
-		.required('You must enter a company name')
+		.required('You must enter the company name')
 		.min(5, 'The company name must be at least 5 characters'),
-		
 });
 
 function Customer(props) {
@@ -76,7 +75,7 @@ function Customer(props) {
 		updateCustomerState();
 	}, [dispatch, routeParams]);
 
-	useEffect(() => { 
+	useEffect(() => {
 		if (!customer) {
 			return;
 		}
@@ -121,7 +120,7 @@ function Customer(props) {
 	/**
 	 * Wait while product data is loading and form is setted
 	 */
-	if (_.isEmpty(form) || (customer && routeParams.customerId !== customer.company_id && routeParams.customerId !== 'new')) {
+	if (_.isEmpty(form) || (customer && routeParams.customerId !== customer.id && routeParams.customerId !== 'new')) {
 		return <FuseLoading />;
 	}
 
@@ -157,7 +156,7 @@ function Customer(props) {
 						</div>
 
 						<div className={tabValue !== 1 ? 'hidden' : ''}>
-						<AddressTab />
+							<AddressTab />
 						</div>
 
 						<div className={tabValue !== 2 ? 'hidden' : ''}>
