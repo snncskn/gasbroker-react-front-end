@@ -21,7 +21,9 @@ function CustomerHeader(props) {
 	const history = useHistory();
 
 	function handleSaveCustomer() {
-		console.log(getValues());
+		dispatch(saveCustomer(getValues())).then(() => {
+			history.push('/customers');
+		});
 		 
 	}
 
