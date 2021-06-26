@@ -19,13 +19,6 @@ import { removeCustomers } from '../store/customersSlice';
 
 const rows = [
 	{
-		id: 'image',
-		align: 'left',
-		disablePadding: true,
-		label: '',
-		sort: false
-	},
-	{
 		id: 'company_name',
 		align: 'left',
 		disablePadding: false,
@@ -120,7 +113,7 @@ function CustomersTableHead(props) {
 					return (
 						<TableCell
 							className="p-4 md:p-16"
-							key={row.company_id}
+							key={row.id}
 							align={row.align}
 							padding={row.disablePadding ? 'none' : 'default'}
 							sortDirection={props.customer.company_id === row.company_id ? props.customer.direction : false}

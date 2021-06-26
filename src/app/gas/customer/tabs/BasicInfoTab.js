@@ -11,7 +11,7 @@ function BasicInfoTab(props) {
 	return (
 		<div>
 			<Controller
-				name="name"
+				name="full_company_name"
 				control={control}
 				render={({ field }) => (
 					<TextField
@@ -20,15 +20,33 @@ function BasicInfoTab(props) {
 						error={!!errors.name}
 						required
 						helperText={errors?.name?.message}
-						label="Name"
+						label="Full Company Name"
 						autoFocus
-						id="name"
+						id="full_company_name"
 						variant="outlined"
 						fullWidth
 					/>
 				)}
 			/>
-
+				<Controller
+				name="company_name"
+				control={control}
+				render={({ field }) => (
+					<TextField
+						{...field}
+						className="mt-8 mb-16"
+						error={!!errors.name}
+						required
+						helperText={errors?.name?.message}
+						label="Company Name"
+						autoFocus
+						id="company_name"
+						variant="outlined"
+						fullWidth
+					/>
+				)}
+			/>
+{/** 
 			<Controller
 				name="description"
 				control={control}
@@ -104,6 +122,7 @@ function BasicInfoTab(props) {
 					/>
 				)}
 			/>
+			*/}
 		</div>
 	);
 }
