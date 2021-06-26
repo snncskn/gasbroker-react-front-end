@@ -14,11 +14,12 @@ class JwtService extends FuseUtils.EventEmitter {
 	setInterceptors = () => {
 		axios.interceptors.response.use(
 			response => {
-				const jwt_access_token = localStorage.getItem('jwt_access_token');
-				response.headers.common['x-access-token'] = `${jwt_access_token}`;
+				// const jwt_access_token = localStorage.getItem('jwt_access_token');
+				// response.headers.common['x-access-token'] = `${jwt_access_token}`;
 				return response;
 			},
 			err => {
+				console.log(err, "err")
 				return new Promise((resolve, reject) => {
 					if (err.response.status === 401 && err.config && !err.config.__isRetryRequest) {
 						// if you ever get an unauthorized response, logout the user
@@ -83,10 +84,12 @@ class JwtService extends FuseUtils.EventEmitter {
 	signInWithToken = () => {
 		return new Promise((resolve, reject) => {
 			axios
-				.post(BASEURL + '/api/auth/access-token', {
-					access_token: this.getAccessToken()
+				.get(BASEURL + '/api/auth/access-token', {
+					data:
+						{ access_token: this.getAccessToken() }
 				})
 				.then(response => {
+					console.log(response)
 					if (response.data.user) {
 						this.setSession(response.data.access_token);
 						resolve(response.data.user);
