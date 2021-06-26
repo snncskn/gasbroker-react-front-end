@@ -1,91 +1,84 @@
-import InputAdornment from '@material-ui/core/InputAdornment';
-import TextField from '@material-ui/core/TextField';
+import { TextField, InputAdornment, Button, Icon } from '@material-ui/core';
+import { DataGrid } from '@material-ui/data-grid';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
 import { Controller, useFormContext } from 'react-hook-form';
 
 function DocumentTab(props) {
 	const methods = useFormContext();
 	const { control } = methods;
+	const columns = [
+		{
+			field: 'id',
+			headerName: 'ID',
+			flex: 1,
+			editable: true,
+			hide: true
 
+		},
+		{
+			field: 'fileName',
+			headerName: 'File Name',
+			flex: 1,
+			editable: true,
+		}
+	];
+
+	const rows = [
+		{ id: 1, fileName: 'file1asdadasdasdasdasd' },
+		{ id: 2, fileName: 'file2' },
+		{ id: 3, fileName: 'file3' },
+	];
 	return (
-		<div>
+		<div style={{ width: '100 % ' }}>
 			<Controller
-				name="priceTaxExcl"
+				name="upload_file"
 				control={control}
 				render={({ field }) => (
-					<TextField
+					<Button
 						{...field}
-						className="mt-8 mb-16"
-						label="Tax Excluded Price"
-						id="priceTaxExcl"
-						InputProps={{
-							startAdornment: <InputAdornment position="start">$</InputAdornment>
-						}}
-						type="number"
-						variant="outlined"
-						autoFocus
-						fullWidth
+						id="upload_file"
+						variant="contained"
+						color="default"
+						startIcon={<AttachFileIcon />}
+					>
+						Evrak yükle
+					</Button>
+				)}
+			/>
+			<Controller
+				name="files"
+				control={control}
+				render={({ field }) => (
+					<DataGrid
+						{...field}
+						id="files"
+						aria-label="Files"
+						rows={rows}
+						columns={columns}
+						autoHeight={true}
+						autoPageSize={true}
+						checkboxSelection
+						disableSelectionOnClick
 					/>
 				)}
 			/>
 
 			<Controller
-				name="priceTaxIncl"
+				name="files"
 				control={control}
 				render={({ field }) => (
-					<TextField
+					<Button
 						{...field}
-						className="mt-8 mb-16"
-						label="Tax Included Price"
-						id="priceTaxIncl"
-						InputProps={{
-							startAdornment: <InputAdornment position="start">$</InputAdornment>
-						}}
-						type="number"
-						variant="outlined"
+						variant="contained"
+						color="primary"
+						endIcon={<Icon>send</Icon>}
 						fullWidth
-					/>
+					>
+						Onaya Gönder
+					</Button>
 				)}
 			/>
-
-			<Controller
-				name="taxRate"
-				control={control}
-				render={({ field }) => (
-					<TextField
-						{...field}
-						className="mt-8 mb-16"
-						label="Tax Rate"
-						id="taxRate"
-						InputProps={{
-							startAdornment: <InputAdornment position="start">$</InputAdornment>
-						}}
-						type="number"
-						variant="outlined"
-						fullWidth
-					/>
-				)}
-			/>
-
-			<Controller
-				name="comparedPrice"
-				control={control}
-				render={({ field }) => (
-					<TextField
-						{...field}
-						className="mt-8 mb-16"
-						label="Compared Price"
-						id="comparedPrice"
-						InputProps={{
-							startAdornment: <InputAdornment position="start">$</InputAdornment>
-						}}
-						type="number"
-						variant="outlined"
-						fullWidth
-						helperText="Add a compare price to show next to the real price"
-					/>
-				)}
-			/>
-		</div>
+		</div >
 	);
 }
 
