@@ -19,7 +19,7 @@ class Auth extends Component {
 			// Comment the lines which you do not use
 			// this.firebaseCheck(),
 			// this.auth0Check(),
-			// this.jwtCheck()
+			this.jwtCheck()
 		]).then(() => {
 			this.setState({ waitAuthCheck: false });
 		});
@@ -36,6 +36,7 @@ class Auth extends Component {
 				jwtService
 					.signInWithToken()
 					.then(user => {
+						console.log(user, "user")
 						this.props.setUserData(user);
 
 						resolve();
