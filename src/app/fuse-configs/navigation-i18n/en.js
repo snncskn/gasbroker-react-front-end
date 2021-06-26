@@ -2,7 +2,7 @@ const locale = {
 	APPLICATIONS: 'Applications',
 	USERS: 'User',
 	CUSTOMERS:'Customers',
-	NEW_CUSTOMERS:'New Customers',
+	NEW_CUSTOMERS:'Customers',
 
 };
 
