@@ -118,7 +118,7 @@ class FuseUtils {
 				.substring(1);
 		}
 		function S12() {
-			return Math.floor((1 + Math.random()) * 0x100000000000000)
+			return Math.floor((1 + Math.random()) * 0x1000000000000)
 				.toString(16)
 				.substring(1);
 		}

@@ -14,7 +14,7 @@ import _ from '@lodash';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { resetCustomer, newCustomer, getCustomer } from '../store/customerSlice';
+import { resetCustomer, newCustomer, getCustomer, saveCustomer } from '../store/customerSlice';
 import reducer from '../store';
 import CustomerHeader from './CustomerHeader';
 import BasicInfoTab from './tabs/BasicInfoTab';
@@ -65,7 +65,8 @@ function Customer(props) {
 			const { customerId } = routeParams;
 
 			if (customerId === 'new') {
-
+				let newCstmr = { name:'Empty',full_name:'Empty'};
+				dispatch(saveCustomer(newCstmr));
 				dispatch(newCustomer());
 			} else {
 

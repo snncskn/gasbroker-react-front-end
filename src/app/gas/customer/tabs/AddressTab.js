@@ -33,10 +33,17 @@ function AddressTab(props) {
 			type:'İş Adresi',
 			lat:'40.825836927685216',
 			lng:'29.29126361565859'};
+		
+
+		if(!customer.address){
+			customer.address = [];
+		}
+
 		customer.address.push(newAddress);
-	 dispatch(addAddressCustomer(newAddress)).then(() => {
-	//	history.push('/customers');
-	});
+		dispatch(addAddressCustomer(newAddress)).then(() => {
+			//	history.push('/customers');
+			});
+
 
 	} 
 	return (
@@ -71,11 +78,10 @@ function AddressTab(props) {
 			>
 				Add
 			</Button>
-
-			{customer.address.map(_item => (
-			 <div>{_item.description} </div>
-			))}
-
+{/**
+ * 
+ */}
+		
 			<Accordion
 						className="shadow-0 border-0 overflow-hidden"
 					 
