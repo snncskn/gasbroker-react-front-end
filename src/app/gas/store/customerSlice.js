@@ -41,7 +41,9 @@ const customerSlice = createSlice({
 			prepare: event=>({
 				payload:{
 					id: FuseUtils.generateGUID(),
-					company_name:''
+					name:'',
+					full_company_name:'',
+					address:[],
 				}
 			})
 		}

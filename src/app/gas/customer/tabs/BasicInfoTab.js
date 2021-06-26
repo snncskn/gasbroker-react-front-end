@@ -1,6 +1,4 @@
-import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
-import { Autocomplete } from '@material-ui/lab';
 import { useFormContext, Controller } from 'react-hook-form';
 
 function BasicInfoTab(props) {
@@ -29,7 +27,7 @@ function BasicInfoTab(props) {
 				)}
 			/>
 				<Controller
-				name="company_name"
+				name="name"
 				control={control}
 				render={({ field }) => (
 					<TextField
@@ -40,7 +38,7 @@ function BasicInfoTab(props) {
 						helperText={errors?.name?.message}
 						label="Company Name"
 						autoFocus
-						id="company_name"
+						id="name"
 						variant="outlined"
 						fullWidth
 					/>

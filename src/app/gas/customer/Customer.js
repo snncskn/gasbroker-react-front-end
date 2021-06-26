@@ -29,7 +29,7 @@ import ApproveTab from './tabs/ApproveTab';
  * Form Validation Schema
  */
 const schema = yup.object().shape({
-	company_name: yup
+	name: yup
 		.string()
 		.required('You must enter a company name')
 		.min(5, 'The company name must be at least 5 characters'),
@@ -37,6 +37,11 @@ const schema = yup.object().shape({
 		.string()
 		.required('You must enter a company name')
 		.min(5, 'The company name must be at least 5 characters'),
+	description: yup
+		.string()
+		.required('You must enter a company name')
+		.min(5, 'The company name must be at least 5 characters'),
+		
 		
 });
 
