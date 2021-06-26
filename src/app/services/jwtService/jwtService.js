@@ -106,7 +106,7 @@ class JwtService extends FuseUtils.EventEmitter {
 	};
 
 	updateUserData = user => {
-		return axios.post('/api/auth/user/update', {
+		return axios.post(BASEURL + '/api/auth/user/update', {
 			user
 		});
 	};
