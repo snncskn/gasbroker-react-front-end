@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 function BasicInfoTab(props) {
 	const dispatch = useDispatch();
 	const methods = useFormContext();
-	const { control, formState } = methods;
+	const { control, formState, setValue } = methods;
 	const { errors } = formState;
 	const [loading, setLoading] = useState(true);
 
