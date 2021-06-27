@@ -21,7 +21,6 @@ export const saveCustomer = createAsyncThunk('gas/customer/saveCustomer', async 
 		
 		
 	}
-
 });
 export const addAddressCustomer = createAsyncThunk('gas/customer/addAddressCustomer', async item => {
 	if(item.address_id){
