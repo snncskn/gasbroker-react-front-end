@@ -42,5 +42,4 @@ function VehicleDocument(props) {
 		</div>
 	);
 }
-
 export default VehicleDocument;
