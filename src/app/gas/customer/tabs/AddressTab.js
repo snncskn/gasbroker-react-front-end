@@ -10,44 +10,82 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import GoogleMap from 'google-map-react';
 import Typography from '@material-ui/core/Typography';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-import { addAddressCustomer } from 'app/gas/store/customerSlice';
+import { addAddressCustomer, getCustomer } from 'app/gas/store/customerSlice';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import FormControlLabel from '@material-ui/core/FormControlLabel'; 
+import { useParams } from 'react-router';
 
 
 function AddressTab(props) {
 	const dispatch = useDispatch();
 	const methods = useFormContext();
 	const customer = useSelector(({ gas }) => gas.customer);
+	const routeParams = useParams();
 
 	const { control, formState, getValues } = methods;
 
 	const { errors } = formState;
 	const [description, setDescription] = useState("");
- 
+	const [title, setTitle] = useState("");
+	const [companyType, setCompanyType] = useState("ev");
 
+	const addressTypeHandle = (event) => {
+		setCompanyType(event.target.value);
+	};
+
+	function resetAddressForm(){
+		setTitle('');
+		setDescription('');
+	}
+ 
 	function handleAddAddress() {
 
 		let newAddress ={
 			id: FuseUtils.generateGUID(),
 			company_id:customer.id,
+			title:title,
 			description:description,
-			type:'İş Adresi',
+			type: companyType,
 			lat:'40.825836927685216',
 			lng:'29.29126361565859'};
 		
-
-		if(!customer.address){
-			customer.address = [];
-		}
-
-		customer.address.push(newAddress);
-		dispatch(addAddressCustomer(newAddress)).then(() => {
-			//	history.push('/customers');
+		dispatch(addAddressCustomer(newAddress)).then((data) => {
+			dispatch(getCustomer(routeParams)).then(action => {
+				resetAddressForm();
+				if (!action.payload) {
+					setNoCustomer(true);
+				}
 			});
+		});
 
 
 	} 
 	return (
 		<div>
+			<Controller
+				name="title"
+				control={control}
+				defaultValue={[]}
+				render={({ field: { onChange, value } }) => (
+					<TextField
+						className="mt-8 mb-16"
+						error={!!errors.name}
+						required
+						multiline
+						rowsMax={2}
+						onChange={async e => {
+							setTitle(e.target.value);
+						}}
+						helperText={errors?.name?.message}
+						label="Title"
+						autoFocus
+						id="title"
+						variant="outlined"
+						fullWidth
+					/>
+				)}
+			/>
 			<Controller
 				name="description"
 				control={control}
@@ -57,8 +95,9 @@ function AddressTab(props) {
 						className="mt-8 mb-16"
 						error={!!errors.name}
 						required
+						multiline
+						rowsMax={2}
 						onChange={async e => {
-							console.log(e);
 							setDescription(e.target.value);
 						}}
 						helperText={errors?.name?.message}
@@ -68,6 +107,17 @@ function AddressTab(props) {
 						variant="outlined"
 						fullWidth
 					/>
+				)}
+			/>
+			<Controller
+				name="companyType"
+				control={control}
+				defaultValue={[]}
+				render={({ field: { onChange, value } }) => (
+					<RadioGroup aria-label="type" name="companyType" value={companyType} onChange={addressTypeHandle}>
+					<FormControlLabel value="ev" control={<Radio />} label="Ev" />
+					<FormControlLabel value="is" control={<Radio />} label="İş" />
+				  </RadioGroup>
 				)}
 			/>
 			<Button
@@ -81,8 +131,10 @@ function AddressTab(props) {
 {/**
  * 
  */}
-		
-			<Accordion
+
+ {customer.addresses.map((item) =>
+  
+  <Accordion
 						className="shadow-0 border-0 overflow-hidden"
 					 
 					>
@@ -90,11 +142,11 @@ function AddressTab(props) {
 							expandIcon={<ExpandMoreIcon />}
 							classes={{ root: 'border border-solid rounded-16 mb-16' }}
 						>
-							<Typography className="font-semibold">Invoice Address</Typography>
+							<Typography className="font-semibold"> {item.title} </Typography>
 						</AccordionSummary>
 						<AccordionDetails className="flex flex-col md:flex-row -mx-8">
 							<Typography className="w-full md:max-w-256 mb-16 md:mb-0 mx-8 text-16">
-							asdasdas
+							{item.description}
 							</Typography>
 							<div className="w-full h-320 rounded-16 overflow-hidden mx-8">
 								<GoogleMap
@@ -109,6 +161,8 @@ function AddressTab(props) {
 							</div>
 						</AccordionDetails>
 					</Accordion>
+)}
+			
 		</div>
 	);
 }
