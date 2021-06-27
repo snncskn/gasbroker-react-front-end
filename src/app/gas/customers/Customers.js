@@ -4,7 +4,7 @@ import reducer from '../store';
 import CustomersHeader from './CustomersHeader';
 import CustomersTable from './CustomersTable';
 
-function Customer() {
+function Customers() {
 	return (
 		<FusePageCarded
 			classes={{
@@ -19,4 +19,4 @@ function Customer() {
 	);
 }
 
-export default withReducer('gas', reducer)(Customer);
+export default withReducer('gas', reducer)(Customers);

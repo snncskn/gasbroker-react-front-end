@@ -5,7 +5,7 @@ import axios from 'axios';
 export const getCustomer = createAsyncThunk('gas/customer/getCustomer', async params => {
 	const response = await axios.get(process.env.REACT_APP_API_URL + '/company/' + params.customerId);
 	const data = await response.data.body;
-	console.log(data);
+	 
 	return data === undefined ? null : data;
 });
 

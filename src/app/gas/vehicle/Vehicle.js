@@ -35,7 +35,7 @@ function Vehicle(props) {
 	const vehicle = useSelector(({ gas }) => gas.vehicle);
 
 	const routeParams = useParams();
-	console.log(routeParams);
+	 
 	const [tabValue, setTabValue] = useState(0);
 	const [noVehicle, setNoVehicle] = useState(false);
 	const methods = useForm({
@@ -74,7 +74,7 @@ function Vehicle(props) {
 	}, [dispatch, routeParams]);
 
 	useEffect(() => {
-		console.log(123);
+	 ;
 		if (!vehicle) {
 			return;
 		}

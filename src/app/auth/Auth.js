@@ -36,7 +36,6 @@ class Auth extends Component {
 				jwtService
 					.signInWithToken()
 					.then(user => {
-						console.log(user, "user")
 						this.props.setUserData(user);
 
 						resolve();

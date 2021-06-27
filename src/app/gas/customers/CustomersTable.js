@@ -43,7 +43,7 @@ function CustomersTable(props) {
 			setData(customers);
 			setPage(0);
 		} else {
-			console.log(customers);
+		 
 			setData(customers);
 		}
 	}, [customers, searchText]);
@@ -79,7 +79,7 @@ function CustomersTable(props) {
 	}
 
 	function handleCheck(event, id) {
-		console.log('handleCheck');
+		 
 		const selectedIndex = selected.indexOf(id);
 		let newSelected = [];
 
