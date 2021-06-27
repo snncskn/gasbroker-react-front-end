@@ -40,7 +40,7 @@ function AddressTab(props) {
 	}
  
 	function handleAddAddress() {
-
+		console.log(process.env.REACT_APP_MAP_KEY);
 		let newAddress ={
 			id: FuseUtils.generateGUID(),
 			company_id:customer.id,
