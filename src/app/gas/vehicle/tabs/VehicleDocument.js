@@ -1,7 +1,7 @@
 import TextField from '@material-ui/core/TextField';
 import { Controller, useFormContext } from 'react-hook-form';
 
-function InventoryTab(props) {
+function VehicleDocument(props) {
 	const methods = useFormContext();
 	const { control } = methods;
 
@@ -43,4 +43,4 @@ function InventoryTab(props) {
 	);
 }
 
-export default InventoryTab;
+export default VehicleDocument;

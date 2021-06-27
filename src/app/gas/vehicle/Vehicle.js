@@ -18,7 +18,7 @@ import { resetProduct, newProduct, getProduct } from '../store/productSlice';
 import reducer from '../store';
 import ProductHeader from './VehicletHeader';
 import BasicInfoTab from './tabs/BasicInfoTab';
-import InventoryTab from './tabs/InventoryTab';
+import InventoryTab from './tabs/VehicleDocument';
 import PricingTab from './tabs/PricingTab';
 import ProductImagesTab from './tabs/ProductImagesTab';
 import ShippingTab from './tabs/ShippingTab';
@@ -154,10 +154,8 @@ function Vehicle(props) {
 						classes={{ root: 'w-full h-64' }}
 					>
 						<Tab className="h-64" label="Basic Info" />
-						<Tab className="h-64" label="Product Images" />
-						<Tab className="h-64" label="Pricing" />
-						<Tab className="h-64" label="Inventory" />
-						<Tab className="h-64" label="Shipping" />
+						<Tab className="h-64" label="Vehicle Document" />
+			 
 					</Tabs>
 				}
 				content={
@@ -167,20 +165,8 @@ function Vehicle(props) {
 						</div>
 
 						<div className={tabValue !== 1 ? 'hidden' : ''}>
-							<ProductImagesTab />
-						</div>
-
-						<div className={tabValue !== 2 ? 'hidden' : ''}>
-							<PricingTab />
-						</div>
-
-						<div className={tabValue !== 3 ? 'hidden' : ''}>
-							<InventoryTab />
-						</div>
-
-						<div className={tabValue !== 4 ? 'hidden' : ''}>
-							<ShippingTab />
-						</div>
+							<VehicleDocument />
+						</div> 
 					</div>
 				}
 				innerScroll
