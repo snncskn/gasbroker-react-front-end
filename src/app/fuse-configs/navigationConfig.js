@@ -30,7 +30,14 @@ const navigationConfig = [
 				icon: 'whatshot',
 				url: '/customers'
 			},
-
+			{
+				id: 'vehicles',
+				title: 'Vehicle',
+				translate: 'VEHICLE',
+				type: 'item',
+				icon: 'whatshot',
+				url: '/vehicles'
+			},
 		 
 		]
 	}
