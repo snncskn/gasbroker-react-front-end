@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 import { lazy } from 'react';
 
-const CustomerConfig = {
+const GasConfig = {
 	settings: {
 		layout: {
 			config: {}
@@ -20,6 +20,10 @@ const CustomerConfig = {
 		{
 			path: '/customers',
 			component: lazy(() => import('./customers/Customers'))
+		},
+		{
+			path: '/vehicle/:vehicleId',
+			component: lazy(() => import('./vehicle/Vehicle'))
 		}
 
 		
@@ -27,5 +31,5 @@ const CustomerConfig = {
 	]
 };
 
-export default CustomerConfig;
+export default GasConfig;
 

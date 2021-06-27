@@ -11,6 +11,24 @@ function BasicInfoTab(props) {
 	return (
 		<div>
 			<Controller
+				name="company_id"
+				control={control}
+				render={({ field }) => (
+					<TextField
+						{...field}
+						className="mt-8 mb-16"
+						error={!!errors.name}
+						required
+						helperText={errors?.name?.message}
+						label="company_id"
+						autoFocus
+						id="company_id"
+						variant="outlined"
+						fullWidth
+					/>
+				)}
+			/> 
+			<Controller
 				name="name"
 				control={control}
 				render={({ field }) => (
@@ -27,83 +45,43 @@ function BasicInfoTab(props) {
 						fullWidth
 					/>
 				)}
-			/>
-
+			/> 
 			<Controller
-				name="description"
+				name="type"
 				control={control}
 				render={({ field }) => (
 					<TextField
 						{...field}
 						className="mt-8 mb-16"
-						id="description"
-						label="Description"
-						type="text"
-						multiline
-						rows={5}
+						error={!!errors.name}
+						required
+						helperText={errors?.name?.message}
+						label="type"
+						autoFocus
+						id="type"
 						variant="outlined"
 						fullWidth
 					/>
 				)}
-			/>
-
+			/> 
 			<Controller
-				name="categories"
+				name="registered_date"
 				control={control}
-				defaultValue={[]}
-				render={({ field: { onChange, value } }) => (
-					<Autocomplete
+				render={({ field }) => (
+					<TextField
+						{...field}
 						className="mt-8 mb-16"
-						multiple
-						freeSolo
-						options={[]}
-						value={value}
-						onChange={(event, newValue) => {
-							onChange(newValue);
-						}}
-						renderInput={params => (
-							<TextField
-								{...params}
-								placeholder="Select multiple categories"
-								label="Categories"
-								variant="outlined"
-								InputLabelProps={{
-									shrink: true
-								}}
-							/>
-						)}
+						error={!!errors.name}
+						required
+						helperText={errors?.name?.message}
+						label="Registered Date"
+						autoFocus
+						id="registered_date"
+						variant="outlined"
+						fullWidth
 					/>
 				)}
-			/>
-
-			<Controller
-				name="tags"
-				control={control}
-				defaultValue={[]}
-				render={({ field: { onChange, value } }) => (
-					<Autocomplete
-						className="mt-8 mb-16"
-						multiple
-						freeSolo
-						options={[]}
-						value={value}
-						onChange={(event, newValue) => {
-							onChange(newValue);
-						}}
-						renderInput={params => (
-							<TextField
-								{...params}
-								placeholder="Select multiple tags"
-								label="Tags"
-								variant="outlined"
-								InputLabelProps={{
-									shrink: true
-								}}
-							/>
-						)}
-					/>
-				)}
-			/>
+			/> 
 		</div>
 	);
 }

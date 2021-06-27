@@ -36,7 +36,7 @@ const navigationConfig = [
 				translate: 'VEHICLE',
 				type: 'item',
 				icon: 'whatshot',
-				url: '/vehicles'
+				url: '/vehicle/new'
 			},
 		 
 		]

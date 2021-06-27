@@ -14,14 +14,11 @@ import _ from '@lodash';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { resetProduct, newProduct, getProduct } from '../store/productSlice';
+import { resetVehicle, newVehicle, getVehicle } from '../store/vehicleSlice';
 import reducer from '../store';
-import ProductHeader from './VehicletHeader';
+import VehicleHeader from './VehicleHeader';
 import BasicInfoTab from './tabs/BasicInfoTab';
-import InventoryTab from './tabs/VehicleDocument';
-import PricingTab from './tabs/PricingTab';
-import ProductImagesTab from './tabs/ProductImagesTab';
-import ShippingTab from './tabs/ShippingTab';
+import VehicleDocument from './tabs/VehicleDocument';
 
 /**
  * Form Validation Schema
@@ -29,17 +26,18 @@ import ShippingTab from './tabs/ShippingTab';
 const schema = yup.object().shape({
 	name: yup
 		.string()
-		.required('You must enter a product name')
-		.min(5, 'The product name must be at least 5 characters')
+		.required('You must enter a vehicle name')
+		.min(5, 'The vehicle name must be at least 5 characters')
 });
 
 function Vehicle(props) {
 	const dispatch = useDispatch();
-	const product = useSelector(({ eCommerceApp }) => eCommerceApp.product);
+	const vehicle = useSelector(({ gas }) => gas.vehicle);
 
 	const routeParams = useParams();
+	console.log(routeParams);
 	const [tabValue, setTabValue] = useState(0);
-	const [noProduct, setNoProduct] = useState(false);
+	const [noVehicle, setNoVehicle] = useState(false);
 	const methods = useForm({
 		mode: 'onChange',
 		defaultValues: {},
@@ -49,49 +47,50 @@ function Vehicle(props) {
 	const form = watch();
 
 	useDeepCompareEffect(() => {
-		function updateProductState() {
-			const { productId } = routeParams;
+		function updateVehicleState() {
+			const { vehicleId } = routeParams;
 
-			if (productId === 'new') {
+			if (vehicleId === 'new') {
 				/**
-				 * Create New Product data
+				 * Create New vehicle data
 				 */
-				dispatch(newProduct());
+				dispatch(newVehicle());
 			} else {
 				/**
-				 * Get Product data
+				 * Get Vehicle data
 				 */
-				dispatch(getProduct(routeParams)).then(action => {
+				dispatch(getVehicle(routeParams)).then(action => {
 					/**
-					 * If the requested product is not exist show message
+					 * If the requested vehicle is not exist show message
 					 */
 					if (!action.payload) {
-						setNoProduct(true);
+						setNoVehicle(true);
 					}
 				});
 			}
 		}
 
-		updateProductState();
+		updateVehicleState();
 	}, [dispatch, routeParams]);
 
 	useEffect(() => {
-		if (!product) {
+		console.log(123);
+		if (!vehicle) {
 			return;
 		}
 		/**
-		 * Reset the form on product state changes
+		 * Reset the form on Vehicle state changes
 		 */
-		reset(product);
-	}, [product, reset]);
+		reset(vehicle);
+	}, [vehicle, reset]);
 
 	useEffect(() => {
 		return () => {
 			/**
-			 * Reset Product on component unload
+			 * Reset Vehicle on component unload
 			 */
-			dispatch(resetProduct());
-			setNoProduct(false);
+			dispatch(resetVehicle());
+			setNoVehicle(false);
 		};
 	}, [dispatch]);
 
@@ -103,9 +102,9 @@ function Vehicle(props) {
 	}
 
 	/**
-	 * Show Message if the requested products is not exists
+	 * Show Message if the requested Vehicle is not exists
 	 */
-	if (noProduct) {
+	if (noVehicle) {
 		return (
 			<motion.div
 				initial={{ opacity: 0 }}
@@ -113,25 +112,25 @@ function Vehicle(props) {
 				className="flex flex-col flex-1 items-center justify-center h-full"
 			>
 				<Typography color="textSecondary" variant="h5">
-					There is no such product!
+					There is no such Vehicle!
 				</Typography>
 				<Button
 					className="mt-24"
 					component={Link}
 					variant="outlined"
-					to="/apps/e-commerce/products"
+					to="/apps/e-commerce/vehicles"
 					color="inherit"
 				>
-					Go to Products Page
+					Go to Vehicles Page
 				</Button>
 			</motion.div>
 		);
 	}
 
 	/**
-	 * Wait while product data is loading and form is setted
+	 * Wait while Vehicle data is loading and form is setted
 	 */
-	if (_.isEmpty(form) || (product && routeParams.productId !== product.id && routeParams.productId !== 'new')) {
+	if (_.isEmpty(form) || (vehicle && routeParams.vehicleId !== vehicle.id && routeParams.vehicleId !== 'new')) {
 		return <FuseLoading />;
 	}
 
@@ -142,7 +141,7 @@ function Vehicle(props) {
 					toolbar: 'p-0',
 					header: 'min-h-72 h-72 sm:h-136 sm:min-h-136'
 				}}
-				header={<ProductHeader />}
+				header={<VehicleHeader />}
 				contentToolbar={
 					<Tabs
 						value={tabValue}
