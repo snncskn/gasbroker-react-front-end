@@ -17,7 +17,6 @@ export const saveCustomer = createAsyncThunk('gas/customer/saveCustomer', async 
 		const response = await axios.post(process.env.REACT_APP_API_URL + '/company', item);
 		return await response.data.body;
 	}
-
 });
 
 export const removeCustomer = createAsyncThunk(
