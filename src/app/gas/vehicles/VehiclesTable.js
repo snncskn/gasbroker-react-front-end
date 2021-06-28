@@ -73,7 +73,7 @@ function VehiclesTable(props) {
 	}
 
 	function handleClick(item) {
-		props.history.push(`/apps/gas/vehicles/${item.id}/${item.handle}`);
+		props.history.push(`/vehicle/${item.id}`);
 	}
 
 	function handleCheck(event, id) {
@@ -175,7 +175,7 @@ function VehiclesTable(props) {
 										<TableCell className="p-4 md:p-16" component="th" scope="row">
 											{n.name}
 										</TableCell>
-   
+
 
 										<TableCell className="p-4 md:p-16" component="th" scope="row" align="right">
 											{n.active ? (

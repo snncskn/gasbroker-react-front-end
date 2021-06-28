@@ -35,7 +35,7 @@ function Vehicle(props) {
 	const vehicle = useSelector(({ gas }) => gas.vehicle);
 
 	const routeParams = useParams();
-	 
+
 	const [tabValue, setTabValue] = useState(0);
 	const [noVehicle, setNoVehicle] = useState(false);
 	const methods = useForm({
@@ -51,9 +51,6 @@ function Vehicle(props) {
 			const { vehicleId } = routeParams;
 
 			if (vehicleId === 'new') {
-				/**
-				 * Create New vehicle data
-				 */
 				dispatch(newVehicle());
 			} else {
 				/**
@@ -74,7 +71,7 @@ function Vehicle(props) {
 	}, [dispatch, routeParams]);
 
 	useEffect(() => {
-	 ;
+		;
 		if (!vehicle) {
 			return;
 		}
@@ -154,7 +151,7 @@ function Vehicle(props) {
 					>
 						<Tab className="h-64" label="Basic Info" />
 						<Tab className="h-64" label="Vehicle Document" />
-			 
+
 					</Tabs>
 				}
 				content={
@@ -165,7 +162,7 @@ function Vehicle(props) {
 
 						<div className={tabValue !== 1 ? 'hidden' : ''}>
 							<VehicleDocument />
-						</div> 
+						</div>
 					</div>
 				}
 				innerScroll

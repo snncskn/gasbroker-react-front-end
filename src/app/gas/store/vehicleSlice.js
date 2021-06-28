@@ -2,11 +2,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import FuseUtils from '@fuse/utils';
 
-export const getVehicle = createAsyncThunk('eCommerceApp/product/getVehicle', async params => {
-	const response = await axios.get('/api/e-commerce-app/product', { params });
-	const data = await response.data;
+export const getVehicle = createAsyncThunk('gas/vehicles/getVehicle', async params => {
+	const response = await axios.get(process.env.REACT_APP_API_URL + '/vehicle/' + params.vehicleId);
+	const data = await response.data.body;
 
-	return data === undefined ? null : data;
+	return data === undefined ? null : data;;
 });
 
 export const removeVehicle = createAsyncThunk(
@@ -19,17 +19,16 @@ export const removeVehicle = createAsyncThunk(
 	}
 );
 
-export const saveVehicle = createAsyncThunk(
-	'gas/vehicle/saveProduct',
-	async (vehicleData, { dispatch, getState }) => {
-		 
-		const { vehicle } = getState().gas.vehicle;
-		const response = await axios.post(process.env.REACT_APP_API_URL + '/vehicle', { ...vehicle, ...vehicleData });
-		const data = await response.data.body;
-
-		return data;
+export const saveVehicle = createAsyncThunk('gas/customer/saveVehicle', async item => {
+	if (item.id) {
+		const response = await axios.put(process.env.REACT_APP_API_URL + '/vehicle/' + item.id, item);
+		return await response.data.body;
+	} else {
+		const response = await axios.post(process.env.REACT_APP_API_URL + '/vehicle', item);
+		return await response.data.body;
 	}
-);
+
+});
 
 const vehicleSlice = createSlice({
 	name: 'gas/vehicle',
@@ -40,30 +39,11 @@ const vehicleSlice = createSlice({
 			reducer: (state, action) => action.payload,
 			prepare: event => ({
 				payload: {
-					id: FuseUtils.generateGUID(),
-					company_id:'',
-					name:'',
-					type:'',
-					registered_date:'',
-
-/*					name: '',
-					handle: '',
-					description: '',
-					categories: [],
-					tags: [],
-					images: [],
-					priceTaxExcl: 0,
-					priceTaxIncl: 0,
-					taxRate: 0,
-					comparedPrice: 0,
-					quantity: 0,
-					sku: '',
-					width: '',
-					height: '',
-					depth: '',
-					weight: '',
-					extraShippingFee: 0,
-					*/
+					id: '',
+					company_id: '',
+					name: '',
+					type: '',
+					registered_date: '',
 					active: true
 				}
 			})

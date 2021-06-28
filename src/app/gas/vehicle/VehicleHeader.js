@@ -7,7 +7,7 @@ import { useFormContext } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import _ from '@lodash';
-import { saveVehicle, removeVehicle} from '../store/vehicleSlice';
+import { saveVehicle, removeVehicle } from '../store/vehicleSlice';
 
 function VehicleHeader(props) {
 	const dispatch = useDispatch();
@@ -21,8 +21,9 @@ function VehicleHeader(props) {
 	const history = useHistory();
 
 	function handleSaveVehicle() {
-		 
-		dispatch(saveVehicle(getValues()));
+		dispatch(saveVehicle(getValues())).then(() => {
+			history.push('/vehicles');
+		});
 	}
 
 	function handleRemoveVehicle() {
