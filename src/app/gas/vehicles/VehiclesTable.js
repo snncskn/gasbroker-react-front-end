@@ -21,7 +21,7 @@ import VehiclesTableHead from './VehiclesTableHead';
 function VehiclesTable(props) {
 	const dispatch = useDispatch();
 	const vehicles = useSelector(selectVehicles);
-	const searchText = useSelector(({ eCommerceApp }) => eCommerceApp.vehicles.searchText);
+	const searchText = useSelector(({ gas }) => gas.vehicles.searchText);
 
 	const [loading, setLoading] = useState(true);
 	const [selected, setSelected] = useState([]);
@@ -171,51 +171,11 @@ function VehiclesTable(props) {
 											/>
 										</TableCell>
 
-										<TableCell
-											className="w-52 px-4 md:px-0"
-											component="th"
-											scope="row"
-											padding="none"
-										>
-											{n.images.length > 0 && n.featuredImageId ? (
-												<img
-													className="w-full block rounded"
-													src={_.find(n.images, { id: n.featuredImageId }).url}
-													alt={n.name}
-												/>
-											) : (
-												<img
-													className="w-full block rounded"
-													src="assets/images/gas/vehicle-image-placeholder.png"
-													alt={n.name}
-												/>
-											)}
-										</TableCell>
 
 										<TableCell className="p-4 md:p-16" component="th" scope="row">
 											{n.name}
 										</TableCell>
-
-										<TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-											{n.categories.join(', ')}
-										</TableCell>
-
-										<TableCell className="p-4 md:p-16" component="th" scope="row" align="right">
-											<span>$</span>
-											{n.priceTaxIncl}
-										</TableCell>
-
-										<TableCell className="p-4 md:p-16" component="th" scope="row" align="right">
-											{n.quantity}
-											<i
-												className={clsx(
-													'inline-block w-8 h-8 rounded mx-8',
-													n.quantity <= 5 && 'bg-red',
-													n.quantity > 5 && n.quantity <= 25 && 'bg-orange',
-													n.quantity > 25 && 'bg-green'
-												)}
-											/>
-										</TableCell>
+   
 
 										<TableCell className="p-4 md:p-16" component="th" scope="row" align="right">
 											{n.active ? (

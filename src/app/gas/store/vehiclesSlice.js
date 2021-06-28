@@ -2,9 +2,9 @@ import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/too
 import axios from 'axios';
 
 export const getVehicles = createAsyncThunk('gas/vehicles/getVehicles', async () => {
-	const response = await axios.get(process.env.REACT_APP_API_URL + '/vehicles');
+	const response = await axios.get(process.env.REACT_APP_API_URL + '/vehicle');
 	const data = await response.data.body;
-
+	console.log(data);
 	return data;
 });
 
