@@ -14,28 +14,37 @@ import _ from '@lodash';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { resetCustomer, newCustomer, getCustomer } from '../store/customerSlice';
+import { resetCustomer, newCustomer, getCustomer, saveCustomer } from '../store/customerSlice';
 import reducer from '../store';
 import CustomerHeader from './CustomerHeader';
 import BasicInfoTab from './tabs/BasicInfoTab';
 
-import PricingTab from './tabs/PricingTab';
-import ProductImagesTab from './tabs/ProductImagesTab';
+import PricingTab from './tabs/DocumentTab';
 import ShippingTab from './tabs/ShippingTab';
 import AddressTab from './tabs/AddressTab';
+import DocumentTab from './tabs/DocumentTab';
+import ApproveTab from './tabs/ApproveTab';
 
 /**
  * Form Validation Schema
  */
 const schema = yup.object().shape({
-	company_name: yup
+	full_name: yup
+		.string()
+		.required('You must enter the full company name')
+		.min(5, 'The full company name must be at least 5 characters'),
+	name: yup
+		.string()
+		.required('You must enter the company name')
+		.min(5, 'The company name must be at least 5 characters'),
+	description: yup
 		.string()
 		.required('You must enter a company name')
 		.min(5, 'The company name must be at least 5 characters'),
-	full_company_name: yup
+	companyType: yup
 		.string()
-		.required('You must enter a company name')
-		.min(5, 'The company name must be at least 5 characters'),
+		.required('You must select a company type'),
+	
 		
 });
 
@@ -59,7 +68,8 @@ function Customer(props) {
 			const { customerId } = routeParams;
 
 			if (customerId === 'new') {
-
+				let newCstmr = { name:'Empty',full_name:'Empty'};
+				dispatch(saveCustomer(newCstmr));
 				dispatch(newCustomer());
 			} else {
 
@@ -75,7 +85,7 @@ function Customer(props) {
 		updateCustomerState();
 	}, [dispatch, routeParams]);
 
-	useEffect(() => { 
+	useEffect(() => {
 		if (!customer) {
 			return;
 		}
@@ -120,7 +130,7 @@ function Customer(props) {
 	/**
 	 * Wait while product data is loading and form is setted
 	 */
-	if (_.isEmpty(form) || (customer && routeParams.customerId !== customer.company_id && routeParams.customerId !== 'new')) {
+	if (_.isEmpty(form) || (customer && routeParams.customerId !== customer.id && routeParams.customerId !== 'new')) {
 		return <FuseLoading />;
 	}
 
@@ -142,11 +152,11 @@ function Customer(props) {
 						scrollButtons="auto"
 						classes={{ root: 'w-full h-64' }}
 					>
-						<Tab className="h-64" label="Basic Info" />
-						<Tab className="h-64" label="Product Images" />
-						<Tab className="h-64" label="Pricing" />
-						<Tab className="h-64" label="Inventory" />
-						<Tab className="h-64" label="Shipping" />
+						<Tab className="h-64" label="Genel Bilgiler" />
+						<Tab className="h-64" label="Adres" />
+						<Tab className="h-64" label="Evrak Listesi" />
+						<Tab className="h-64" label="Onay Süreçleri" />
+						<Tab className="h-64" label="Kullanıcı Bilgileri" />
 					</Tabs>
 				}
 				content={
@@ -156,15 +166,15 @@ function Customer(props) {
 						</div>
 
 						<div className={tabValue !== 1 ? 'hidden' : ''}>
-
+							<AddressTab />
 						</div>
 
 						<div className={tabValue !== 2 ? 'hidden' : ''}>
-							<PricingTab />
+							<DocumentTab />
 						</div>
 
 						<div className={tabValue !== 3 ? 'hidden' : ''}>
-							<AddressTab />
+							<ApproveTab />
 						</div>
 
 						<div className={tabValue !== 4 ? 'hidden' : ''}>

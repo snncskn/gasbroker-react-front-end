@@ -30,7 +30,7 @@ function CustomersTable(props) {
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 	const [customer, setCustomer] = useState({
 		direction: 'asc',
-		company_id: null
+		id: null
 	});
 
 	useEffect(() => {
@@ -39,9 +39,11 @@ function CustomersTable(props) {
 
 	useEffect(() => {
 		if (searchText.length !== 0) {
-			setData(_.filter(customers, item => item.full_company_name.toLowerCase().includes(searchText.toLowerCase())));
+			//setData(_.filter(customers, item => item.full_name.toLowerCase().includes(searchText.toLowerCase())));
+			setData(customers);
 			setPage(0);
 		} else {
+			console.log(customers);
 			setData(customers);
 		}
 	}, [customers, searchText]);
@@ -50,7 +52,7 @@ function CustomersTable(props) {
 		const id = property;
 		let direction = 'desc';
 
-		if (customer.company_id === property && customer.direction === 'desc') {
+		if (customer.id === property && customer.direction === 'desc') {
 			direction = 'asc';
 		}
 
@@ -62,7 +64,7 @@ function CustomersTable(props) {
 
 	function handleSelectAllClick(event) {
 		if (event.target.checked) {
-			setSelected(data.map(n => n.company_id));
+			setSelected(data.map(n => n.id));
 			return;
 		}
 		setSelected([]);
@@ -73,7 +75,7 @@ function CustomersTable(props) {
 	}
 
 	function handleClick(item) {
-		props.history.push(`/customer/${item.company_id}`);
+		props.history.push(`/customer/${item.id}`);
 	}
 
 	function handleCheck(event, id) {
@@ -136,13 +138,13 @@ function CustomersTable(props) {
 						{_.orderBy(
 							data,
 							[
-							 
+
 							],
 							[customer.direction]
 						)
 							.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 							.map(n => {
-								const isSelected = selected.indexOf(n.company_id) !== -1;
+								const isSelected = selected.indexOf(n.id) !== -1;
 								return (
 									<TableRow
 										className="h-72 cursor-pointer"
@@ -150,7 +152,7 @@ function CustomersTable(props) {
 										role="checkbox"
 										aria-checked={isSelected}
 										tabIndex={-1}
-										key={n.company_id}
+										key={n.id}
 										selected={isSelected}
 										onClick={event => handleClick(n)}
 									>
@@ -158,13 +160,13 @@ function CustomersTable(props) {
 											<Checkbox
 												checked={isSelected}
 												onClick={event => event.stopPropagation()}
-												onChange={event => handleCheck(event, n.company_id)}
+												onChange={event => handleCheck(event, n.id)}
 											/>
 										</TableCell>
 
 										<TableCell className="p-4 md:p-16" component="th" scope="row">
-											{n.full_company_name}
-										</TableCell> 
+											{n.full_name}
+										</TableCell>
 
 										<TableCell className="p-4 md:p-16" component="th" scope="row" align="right">
 											{n.is_active ? (

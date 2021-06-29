@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/too
 import axios from 'axios';
 
 export const getCustomers = createAsyncThunk('gas/customers/getCustomers', async () => {
-	
+ 
 	const response = await axios.get(process.env.REACT_APP_API_URL+'/company');
-	const data = await response.data;
-	return data.body;
+	const data = await response.data.body;
+	return data;
 });
 
 export const removeCustomers = createAsyncThunk(

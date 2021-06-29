@@ -106,13 +106,24 @@ class FuseUtils {
 	}
 
 	static generateGUID() {
+		console.log(123);
 		function S4() {
 			return Math.floor((1 + Math.random()) * 0x10000)
 				.toString(16)
 				.substring(1);
 		}
+		function S8() {
+			return Math.floor((1 + Math.random()) * 0x100000000)
+				.toString(16)
+				.substring(1);
+		}
+		function S12() {
+			return Math.floor((1 + Math.random()) * 0x1000000000000)
+				.toString(16)
+				.substring(1);
+		}
 
-		return S4() + S4();
+		return S8() +'-'+ S4()+'-'+ S4()+'-'+ S4()+'-'+ S12();
 	}
 
 	static toggleInArray(item, array) {

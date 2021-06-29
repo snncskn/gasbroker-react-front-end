@@ -25,7 +25,7 @@ const rows = [
 		label: 'Company Name',
 		sort: true
 	},
-	
+
 	{
 		id: 'active',
 		align: 'right',
@@ -116,7 +116,7 @@ function CustomersTableHead(props) {
 							key={row.id}
 							align={row.align}
 							padding={row.disablePadding ? 'none' : 'default'}
-							sortDirection={props.customer.company_id === row.company_id ? props.customer.direction : false}
+							sortDirection={props.customer.id === row.id ? props.customer.direction : false}
 						>
 							{row.sort && (
 								<Tooltip
@@ -125,9 +125,9 @@ function CustomersTableHead(props) {
 									enterDelay={300}
 								>
 									<TableSortLabel
-										active={props.customer.company_id === row.company_id}
+										active={props.customer.id === row.id}
 										direction={props.customer.direction}
-										onClick={createSortHandler(row.company_id)}
+										onClick={createSortHandler(row.id)}
 										className="font-semibold"
 									>
 										{row.label}
