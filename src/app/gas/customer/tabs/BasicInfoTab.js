@@ -69,24 +69,8 @@ function BasicInfoTab(props) {
 						required
 						helperText={errors?.name?.message}
 						label="Company Name"
+						autoFocus
 						id="name"
-						variant="outlined"
-						fullWidth
-					/>
-				)}
-			/>
-			{/* <Controller
-				name="company_no"
-				control={control}
-				render={({ field }) => (
-					<TextField
-						{...field}
-						id="company_no"
-						select
-						label="No"
-						value={companyNo}
-						helperText="Select Company No"
-						onChange={handleCompanyNoChange}
 						variant="outlined"
 						SelectProps={{
 							native: true,
@@ -100,7 +84,7 @@ function BasicInfoTab(props) {
 						))}
 					</TextField>
 				)}
-			/> */}
+			/>  
 			<Controller
 				name="created_date"
 				control={control}

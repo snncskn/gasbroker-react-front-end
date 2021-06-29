@@ -1,11 +1,9 @@
 const locale = {
 	APPLICATIONS: 'Applications',
 	USERS: 'User',
-	CUSTOMERS: 'Customers',
-	NEW_CUSTOMERS: 'New Customers',
-	VEHICLE: 'Vehicle',
-	VEHICLES: 'Vehicles',
-	NEW_VEHICLES: 'New Vehicles'
+	CUSTOMERS:'Customers',
+	NEW_CUSTOMERS:'Customers',
+
 };
 
 export default locale;

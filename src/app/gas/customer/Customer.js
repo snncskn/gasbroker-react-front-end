@@ -14,7 +14,7 @@ import _ from '@lodash';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { resetCustomer, newCustomer, getCustomer } from '../store/customerSlice';
+import { resetCustomer, newCustomer, getCustomer, saveCustomer } from '../store/customerSlice';
 import reducer from '../store';
 import CustomerHeader from './CustomerHeader';
 import BasicInfoTab from './tabs/BasicInfoTab';
@@ -37,6 +37,15 @@ const schema = yup.object().shape({
 		.string()
 		.required('You must enter the company name')
 		.min(5, 'The company name must be at least 5 characters'),
+	description: yup
+		.string()
+		.required('You must enter a company name')
+		.min(5, 'The company name must be at least 5 characters'),
+	companyType: yup
+		.string()
+		.required('You must select a company type'),
+	
+		
 });
 
 function Customer(props) {
@@ -59,7 +68,8 @@ function Customer(props) {
 			const { customerId } = routeParams;
 
 			if (customerId === 'new') {
-
+				let newCstmr = { name:'Empty',full_name:'Empty'};
+				dispatch(saveCustomer(newCstmr));
 				dispatch(newCustomer());
 			} else {
 

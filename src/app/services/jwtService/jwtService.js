@@ -26,6 +26,9 @@ class JwtService extends FuseUtils.EventEmitter {
 						this.emit('onAutoLogout', 'Invalid access_token');
 						this.setSession(null);
 					}
+					if(err.response.status === 500){
+						console.log(err.response.data.error.errors);
+					}
 					throw err;
 				});
 			}
