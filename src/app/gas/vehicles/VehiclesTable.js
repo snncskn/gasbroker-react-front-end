@@ -176,13 +176,16 @@ function VehiclesTable(props) {
 											{n.name}
 										</TableCell>
 
+										<TableCell className="p-4 md:p-16" component="th" scope="row">
+											{n.type}
+										</TableCell>
 
-										<TableCell className="p-4 md:p-16" component="th" scope="row" align="right">
-											{n.active ? (
-												<Icon className="text-green text-20">check_circle</Icon>
-											) : (
-												<Icon className="text-red text-20">remove_circle</Icon>
-											)}
+										<TableCell className="p-4 md:p-16" component="th" scope="row">
+											{n.company_id}
+										</TableCell>
+
+										<TableCell className="p-4 md:p-16" component="th" scope="row">
+											{n.registered_date}
 										</TableCell>
 									</TableRow>
 								);

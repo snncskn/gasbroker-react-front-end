@@ -9,20 +9,20 @@ import { useDispatch, useSelector } from 'react-redux';
 function BasicInfoTab(props) {
 	const dispatch = useDispatch();
 	const methods = useFormContext();
-	const { control, formState, setValue } = methods;
+	const { control, formState } = methods;
 	const { errors } = formState;
 	const [loading, setLoading] = useState(true);
-
 	const [customers, setCustomers] = useState({
 		direction: 'asc',
 		id: null
 	});
- 	
+	const [value, setValue] = useState(customers[0]);
+
 	useEffect(() => {
 		dispatch(getCustomers()).then((data) => {
 			setLoading(false);
 			setCustomers(data.payload);
-			 
+
 
 		});
 	}, [dispatch]);
@@ -30,38 +30,37 @@ function BasicInfoTab(props) {
 
 	return (
 		<div>
-		 
-		 	<Controller
+
+			<Controller
 				name="company_id"
-				control={control} 
-				render={({ field: { onChange, value } }) => (
+				control={control}
+				render={({ field }) => (
 					<Autocomplete
-					className="mt-8 mb-16"
-					freeSolo
-					options={customers}
-					getOptionLabel={label => {
-						return label.name;
-					}}
-					 
-					onChange={(event, newValue) => {
-						setValue(
-							'company_id',
-							newValue.id
-						);
-					}} 
-					renderInput={params => (
-						<TextField
-							{...params}
-							placeholder="Select company"
-							label="Company"
-							 
-							variant="outlined"
-							InputLabelProps={{
-								shrink: true
-							}}
-						/>
-					)}
-				/>
+						{...field}
+						className="mt-8 mb-16"
+						freeSolo
+						options={customers}
+						value={value}
+						getOptionLabel={label => {
+							return label.name;
+						}}
+
+						onChange={(event, newValue) => {
+							setValue(newValue.id);
+						}}
+						renderInput={params => (
+							<TextField
+								{...params}
+								placeholder="Select company"
+								label="Company"
+
+								variant="outlined"
+								InputLabelProps={{
+									shrink: true
+								}}
+							/>
+						)}
+					/>
 				)}
 			/>
 			<Controller
@@ -81,7 +80,7 @@ function BasicInfoTab(props) {
 						fullWidth
 					/>
 				)}
-			/> 
+			/>
 			<Controller
 				name="type"
 				control={control}
@@ -99,7 +98,7 @@ function BasicInfoTab(props) {
 						fullWidth
 					/>
 				)}
-			/> 
+			/>
 			<Controller
 				name="registered_date"
 				control={control}
@@ -118,7 +117,7 @@ function BasicInfoTab(props) {
 						fullWidth
 					/>
 				)}
-			/> 
+			/>
 		</div>
 	);
 }

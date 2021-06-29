@@ -149,20 +149,18 @@ function Vehicle(props) {
 						scrollButtons="auto"
 						classes={{ root: 'w-full h-64' }}
 					>
-						<Tab className="h-64" label="Basic Info" />
-						<Tab className="h-64" label="Vehicle Document" />
-
-					</Tabs>
+						{/* <Tab className="h-64" label="Basic Info" /> */}
+						{/* <Tab className="h-64" label="Vehicle Document" /> */}					</Tabs>
 				}
 				content={
 					<div className="p-16 sm:p-24 max-w-2xl">
 						<div className={tabValue !== 0 ? 'hidden' : ''}>
 							<BasicInfoTab />
 						</div>
-
+						{/* 
 						<div className={tabValue !== 1 ? 'hidden' : ''}>
 							<VehicleDocument />
-						</div>
+						</div> */}
 					</div>
 				}
 				innerScroll

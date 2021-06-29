@@ -19,46 +19,32 @@ import { removeVehicles } from '../store/vehiclesSlice';
 
 const rows = [
 	{
-		id: 'image',
-		align: 'left',
-		disablePadding: true,
-		label: '',
-		sort: false
-	},
-	{
 		id: 'name',
 		align: 'left',
 		disablePadding: false,
 		label: 'Name',
-		sort: true
+		sort: true,
 	},
 	{
-		id: 'categories',
+		id: 'type',
 		align: 'left',
 		disablePadding: false,
-		label: 'Category',
-		sort: true
+		label: 'Type',
+		sort: true,
 	},
 	{
-		id: 'priceTaxIncl',
-		align: 'right',
+		id: 'company',
+		align: 'left',
 		disablePadding: false,
-		label: 'Price',
-		sort: true
+		label: 'Company',
+		sort: true,
 	},
 	{
-		id: 'quantity',
-		align: 'right',
+		id: 'registered_date',
+		align: 'left',
 		disablePadding: false,
-		label: 'Quantity',
-		sort: true
-	},
-	{
-		id: 'active',
-		align: 'right',
-		disablePadding: false,
-		label: 'Active',
-		sort: true
+		label: 'Registered Date',
+		sort: true,
 	}
 ];
 
