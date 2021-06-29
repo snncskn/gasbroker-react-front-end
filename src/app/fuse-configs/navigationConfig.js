@@ -32,13 +32,13 @@ const navigationConfig = [
 			},
 			{
 				id: 'vehicles',
-				title: 'Vehicle',
+				title: 'Vehicles',
 				translate: 'VEHICLE',
 				type: 'item',
 				icon: 'whatshot',
-				url: '/vehicle/new'
+				url: '/vehicles'
 			},
-		 
+
 		]
 	}
 ];

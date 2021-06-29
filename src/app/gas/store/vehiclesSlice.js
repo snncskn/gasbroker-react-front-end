@@ -1,35 +1,35 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const getProducts = createAsyncThunk('eCommerceApp/products/getProducts', async () => {
-	const response = await axios.get('/api/e-commerce-app/products');
-	const data = await response.data;
-
+export const getVehicles = createAsyncThunk('gas/vehicles/getVehicles', async () => {
+	const response = await axios.get(process.env.REACT_APP_API_URL + '/vehicle');
+	const data = await response.data.body;
+	console.log(data);
 	return data;
 });
 
-export const removeProducts = createAsyncThunk(
-	'eCommerceApp/products/removeProducts',
-	async (productIds, { dispatch, getState }) => {
-		await axios.post('/api/e-commerce-app/remove-products', { productIds });
+export const removeVehicles = createAsyncThunk(
+	'gas/vehicles/removeVehicles',
+	async (vehicleIds, { dispatch, getState }) => {
+		await axios.post('/api/gas/remove-vehicles', { vehicleIds });
 
-		return productIds;
+		return vehicleIds;
 	}
 );
 
-const productsAdapter = createEntityAdapter({});
+const vehiclesAdapter = createEntityAdapter({});
 
-export const { selectAll: selectProducts, selectById: selectProductById } = productsAdapter.getSelectors(
-	state => state.eCommerceApp.products
+export const { selectAll: selectVehicles, selectById: selectVehicleById } = vehiclesAdapter.getSelectors(
+	state => state.gas.vehicles
 );
 
-const productsSlice = createSlice({
-	name: 'eCommerceApp/products',
-	initialState: productsAdapter.getInitialState({
+const vehiclesSlice = createSlice({
+	name: 'gas/vehicles',
+	initialState: vehiclesAdapter.getInitialState({
 		searchText: ''
 	}),
 	reducers: {
-		setProductsSearchText: {
+		setVehiclesSearchText: {
 			reducer: (state, action) => {
 				state.searchText = action.payload;
 			},
@@ -37,11 +37,11 @@ const productsSlice = createSlice({
 		}
 	},
 	extraReducers: {
-		[getProducts.fulfilled]: productsAdapter.setAll,
-		[removeProducts.fulfilled]: (state, action) => productsAdapter.removeMany(state, action.payload)
+		[getVehicles.fulfilled]: vehiclesAdapter.setAll,
+		[removeVehicles.fulfilled]: (state, action) => vehiclesAdapter.removeMany(state, action.payload)
 	}
 });
 
-export const { setProductsSearchText } = productsSlice.actions;
+export const { setVehiclesSearchText } = vehiclesSlice.actions;
 
-export default productsSlice.reducer;
+export default vehiclesSlice.reducer;

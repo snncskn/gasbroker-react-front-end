@@ -8,7 +8,7 @@ const GasConfig = {
 		}
 	},
 	routes: [
-		
+
 		{
 			path: '/customer/:customerId',
 			component: lazy(() => import('./customer/Customer'))
@@ -24,9 +24,13 @@ const GasConfig = {
 		{
 			path: '/vehicle/:vehicleId',
 			component: lazy(() => import('./vehicle/Vehicle'))
+		},
+		{
+			path: '/vehicles',
+			component: lazy(() => import('./vehicles/Vehicles'))
 		}
 
-		
+
 
 	]
 };

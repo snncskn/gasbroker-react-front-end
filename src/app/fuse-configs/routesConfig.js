@@ -22,6 +22,10 @@ const routes = [
 	{
 		path: '/vehicle',
 		component: () => <Redirect to="/vehicle" />
+	},
+	{
+		path: '/vehicles',
+		component: () => <Redirect to="/vehicles" />
 	}
 
 ];
