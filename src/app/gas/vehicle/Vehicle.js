@@ -118,7 +118,7 @@ function Vehicle(props) {
 					to="/apps/e-commerce/vehicles"
 					color="inherit"
 				>
-					Go to Vehicles Page
+					Go to Vehicles Sinan
 				</Button>
 			</motion.div>
 		);
