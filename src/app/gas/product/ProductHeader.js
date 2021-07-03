@@ -31,6 +31,7 @@ function ProductHeader(props) {
     });
   }
 
+
   return (
     <div className="flex flex-1 w-full items-center justify-between">
       <div className="flex flex-col items-start max-w-full min-w-0">
