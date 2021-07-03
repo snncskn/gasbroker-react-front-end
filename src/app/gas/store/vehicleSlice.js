@@ -9,11 +9,17 @@ export const getVehicle = createAsyncThunk('gas/vehicles/getVehicle', async para
 	return data === undefined ? null : data;;
 });
 
+export const getVehicleType = createAsyncThunk('gas/type/vehicle', async params => {
+	const response = await axios.get(process.env.REACT_APP_API_URL + '/parameter/category/' + params);
+	const data = await response.data.body;
+
+	return data === undefined ? null : data;;
+});
 export const removeVehicle = createAsyncThunk(
 	'gas/vehicle/removeProduct',
 	async (val, { dispatch, getState }) => {
 		const { id } = getState().gas.vehicle;
-		await axios.post('/api/e-commerce-app/remove-product', { id });
+		await axios.put(process.env.REACT_APP_API_URL + '/vehicle/delete/'+id, { id });
 
 		return id;
 	}
@@ -41,6 +47,7 @@ const vehicleSlice = createSlice({
 				payload: {
 					id: '',
 					company_id: '',
+					company: '',
 					name: '',
 					type: '',
 					registered_date: '',

@@ -17,8 +17,7 @@ import * as yup from 'yup';
 import { resetVehicle, newVehicle, getVehicle } from '../store/vehicleSlice';
 import reducer from '../store';
 import VehicleHeader from './VehicleHeader';
-import BasicInfoTab from './tabs/BasicInfoTab';
-import VehicleDocument from './tabs/VehicleDocument';
+import BasicInfoTab from './tabs/BasicInfoTab'; 
 
 /**
  * Form Validation Schemaaaa
@@ -27,7 +26,13 @@ const schema = yup.object().shape({
 	name: yup
 		.string()
 		.required('You must enter a vehicle name')
-		.min(5, 'The vehicle name must be at least 5 characters')
+		.min(2, 'The vehicle name must be at least 2 characters'),
+	type: yup
+		.string()
+		.required('You must enter a type'),
+	registered_date: yup
+		.string()
+		.required('You must enter a registered date')
 });
 
 function Vehicle(props) {
@@ -53,17 +58,13 @@ function Vehicle(props) {
 			if (vehicleId === 'new') {
 				dispatch(newVehicle());
 			} else {
-				/**
-				 * Get Vehicle data
-				 */
+			 
 				dispatch(getVehicle(routeParams)).then(action => {
-					/**
-					 * If the requested vehicle is not exist show message
-					 */
 					if (!action.payload) {
 						setNoVehicle(true);
 					}
 				});
+			
 			}
 		}
 
@@ -139,28 +140,13 @@ function Vehicle(props) {
 					header: 'min-h-72 h-72 sm:h-136 sm:min-h-136'
 				}}
 				header={<VehicleHeader />}
-				contentToolbar={
-					<Tabs
-						value={tabValue}
-						onChange={handleTabChange}
-						indicatorColor="primary"
-						textColor="primary"
-						variant="scrollable"
-						scrollButtons="auto"
-						classes={{ root: 'w-full h-64' }}
-					>
-						{/* <Tab className="h-64" label="Basic Info" /> */}
-						{/* <Tab className="h-64" label="Vehicle Document" /> */}					</Tabs>
-				}
+				 
 				content={
 					<div className="p-16 sm:p-24 max-w-2xl">
 						<div className={tabValue !== 0 ? 'hidden' : ''}>
 							<BasicInfoTab />
 						</div>
-						{/* 
-						<div className={tabValue !== 1 ? 'hidden' : ''}>
-							<VehicleDocument />
-						</div> */}
+					 
 					</div>
 				}
 				innerScroll

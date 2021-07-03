@@ -128,7 +128,7 @@ function AddressTab(props) {
 			</Button>
 {/**
  * 
- */}
+
 
  {customer.addresses.map((item) =>
   
@@ -159,7 +159,9 @@ function AddressTab(props) {
 							</div>
 						</AccordionDetails>
 					</Accordion>
+					
 )}
+ */}
 			
 		</div>
 	);

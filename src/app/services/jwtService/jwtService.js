@@ -29,7 +29,7 @@ class JwtService extends FuseUtils.EventEmitter {
 					if(err.response.status === 500){
 						console.log(err.response.data.error.errors);
 					}
-					throw err;
+					//throw err;
 				});
 			}
 		);
