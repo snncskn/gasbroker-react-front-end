@@ -19,7 +19,7 @@ function BasicInfoTab(props) {
 		direction: 'asc',
 		id: null
 	});
-	const [value, setValue] = useState(customers[0]);
+	const [value, setValue] = useState('');
 
 	useEffect(() => {
 		dispatch(getCustomers()).then((data) => {
@@ -45,14 +45,8 @@ function BasicInfoTab(props) {
 						options={customers}
 						value={value}
 						getOptionLabel={label => {
-							if(!label.full_name){
-								return label;
-							}else{
-								return label.full_name;
-
-							}
+							return label.name;
 						}}
-
 						onChange={(event, newValue) => {
 							setValue(newValue);
 						}}
@@ -61,7 +55,6 @@ function BasicInfoTab(props) {
 								{...params}
 								placeholder="Select company"
 								label="Company"
-
 								variant="outlined"
 								InputLabelProps={{
 									shrink: true

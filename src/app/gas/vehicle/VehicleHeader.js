@@ -21,6 +21,7 @@ function VehicleHeader(props) {
 	const history = useHistory();
 
 	function handleSaveVehicle() {
+		console.log(getValues());
 		dispatch(saveVehicle(getValues())).then(() => {
 			history.push('/vehicles');
 		});
