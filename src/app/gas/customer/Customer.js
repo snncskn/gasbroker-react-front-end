@@ -37,14 +37,6 @@ const schema = yup.object().shape({
 		.string()
 		.required('You must enter the company name')
 		.min(5, 'The company name must be at least 5 characters'),
-	description: yup
-		.string()
-		.required('You must enter a company name')
-		.min(5, 'The company name must be at least 5 characters'),
-	companyType: yup
-		.string()
-		.required('You must select a company type'),
-	
 		
 });
 

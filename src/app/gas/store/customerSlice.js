@@ -42,6 +42,13 @@ export const removeCustomer = createAsyncThunk(
 	}
 );
 
+export const getType = createAsyncThunk('gas/company/type', async () => {
+	const response = await axios.get(process.env.REACT_APP_API_URL + '/parameter/category/COMPANY_TYPE');
+	const data = await response.data.body;
+
+	return data === undefined ? null : data;;
+});
+
 const customerSlice = createSlice({
 	name: 'gas/customer',
 	initialState: null,

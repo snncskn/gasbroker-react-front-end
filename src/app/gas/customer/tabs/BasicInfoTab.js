@@ -8,7 +8,11 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useFormContext, Controller } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Autocomplete } from '@material-ui/lab';
+import { getType } from 'app/gas/store/customerSlice';
+
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -18,25 +22,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function BasicInfoTab(props) {
-	const classes = useStyles();
+	const dispatch = useDispatch();
+
 	const methods = useFormContext();
-	const { control, formState } = methods;
+	const { control, formState, watch ,setValue } = methods;
 	const { errors } = formState;
 	const [companyNo, setCompanyNo] = useState();
-	const [selectedDate, setSelectedDate] = useState();
-	const [companyType, setCompanyType] = useState('Firma');
+	const [selectedDate, setSelectedDate] = useState(); 
+	const [types, setTypes] = useState(); 
+	const defaultTypes = watch('types');
 
-	const handleCompanyNoChange = (event) => {
-		setCompanyNo(event.target.value);
-	};
+	useEffect(() => {
+	 
+		dispatch(getType()).then(action => {
+			if (action.payload) {
+				setTypes(action.payload);
+			}
+		});
 
-	const handleDateChange = (date) => {
-		setSelectedDate(date);
-	};
+	}, [dispatch]);
 
-	const handleCompanyTypeChange = (event) => {
-		setCompanyType(event.target.value);
-	};
 
 	return (
 		<div>
@@ -47,9 +52,9 @@ function BasicInfoTab(props) {
 					<TextField
 						{...field}
 						className="mt-8 mb-16"
-						error={!!errors.name}
+						error={!!errors.full_name}
 						required
-						helperText={errors?.name?.message}
+						helperText={errors?.full_name?.message}
 						label="Company Full Name"
 						autoFocus
 						id="full_name"
@@ -76,15 +81,56 @@ function BasicInfoTab(props) {
 							native: true,
 						}}
 						fullWidth
-					>
-						{companyNos.map((option) => (
-							<option key={option.no} value={option.no}>
-								{option.values}
-							</option >
-						))}
-					</TextField>
+					/>
 				)}
 			/>  
+				<Controller
+				name="type"
+				control={control}
+				render={({ field: { onChange, value } }) => (
+					<Autocomplete
+						className="mt-8 mb-16"
+						freeSolo
+						multiple
+						options={types}
+						defaultValue={defaultTypes}
+						getOptionLabel={label => {
+							if (label.name) {
+
+								return label.name;
+							} else {
+								return label;
+
+							}
+						}}
+
+						onChange={(event, newValue) => {
+							console.log(newValue)
+							let tmp = [];
+							newValue.map(item=>{
+								tmp.push(item.name);
+							})
+							setValue(
+								'types',
+								tmp
+							);
+							 
+						}}
+						renderInput={params => (
+							<TextField
+								{...params}
+								placeholder="Select Type"
+								label="Type"
+								variant="outlined"
+								InputLabelProps={{
+									shrink: true
+								}}
+							/>
+						)}
+					/>
+				)}
+			/>
+
 			<Controller
 				name="created_date"
 				control={control}

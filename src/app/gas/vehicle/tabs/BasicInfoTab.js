@@ -74,7 +74,6 @@ function BasicInfoTab(props) {
 								{...params}
 								placeholder="Select company"
 								label="Company"
-
 								variant="outlined"
 								InputLabelProps={{
 									shrink: true
