@@ -58,17 +58,13 @@ function Vehicle(props) {
 			if (vehicleId === 'new') {
 				dispatch(newVehicle());
 			} else {
-				/**
-				 * Get Vehicle data
-				 */
+			 
 				dispatch(getVehicle(routeParams)).then(action => {
-					/**
-					 * If the requested vehicle is not exist show message
-					 */
 					if (!action.payload) {
 						setNoVehicle(true);
 					}
 				});
+			
 			}
 		}
 

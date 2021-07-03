@@ -9,6 +9,12 @@ export const getVehicle = createAsyncThunk('gas/vehicles/getVehicle', async para
 	return data === undefined ? null : data;;
 });
 
+export const getVehicleType = createAsyncThunk('gas/type/vehicle', async params => {
+	const response = await axios.get(process.env.REACT_APP_API_URL + '/parameter/category/' + params);
+	const data = await response.data.body;
+
+	return data === undefined ? null : data;;
+});
 export const removeVehicle = createAsyncThunk(
 	'gas/vehicle/removeProduct',
 	async (val, { dispatch, getState }) => {
