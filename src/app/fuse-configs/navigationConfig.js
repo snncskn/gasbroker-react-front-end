@@ -1,5 +1,4 @@
 import i18next from 'i18next';
-import ar from './navigation-i18n/ar';
 import en from './navigation-i18n/en';
 import tr from './navigation-i18n/tr';
 
@@ -30,8 +29,23 @@ const navigationConfig = [
 				icon: 'whatshot',
 				url: '/customers'
 			},
+			{
+				id: 'vehicles',
+				title: 'Vehicles',
+				translate: 'VEHICLE',
+				type: 'item',
+				icon: 'whatshot',
+				url: '/vehicles'
+			},
+			{
+				id: 'products',
+				title: 'Products',
+				translate: 'PRODUCT',
+				type: 'item',
+				icon: 'whatshot',
+				url: '/products'
+			},
 
-		 
 		]
 	}
 ];

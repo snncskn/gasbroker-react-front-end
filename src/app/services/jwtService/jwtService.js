@@ -29,7 +29,7 @@ class JwtService extends FuseUtils.EventEmitter {
 					if(err.response.status === 500){
 						console.log(err.response.data.error.errors);
 					}
-					throw err;
+					//throw err;
 				});
 			}
 		);
@@ -92,7 +92,6 @@ class JwtService extends FuseUtils.EventEmitter {
 						{ access_token: this.getAccessToken() }
 				})
 				.then(response => {
-					console.log(response)
 					if (response.data.user) {
 						this.setSession(response.data.access_token);
 						resolve(response.data.user);
@@ -109,7 +108,7 @@ class JwtService extends FuseUtils.EventEmitter {
 	};
 
 	updateUserData = user => {
-		return axios.post('/api/auth/user/update', {
+		return axios.post(BASEURL + '/api/auth/user/update', {
 			user
 		});
 	};

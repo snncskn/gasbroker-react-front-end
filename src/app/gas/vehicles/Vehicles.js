@@ -1,10 +1,10 @@
 import FusePageCarded from '@fuse/core/FusePageCarded';
 import withReducer from 'app/store/withReducer';
 import reducer from '../store';
-import CustomersHeader from './CustomersHeader';
-import CustomersTable from './CustomersTable';
+import VehiclesHeader from './VehiclesHeader';
+import VehiclesTable from './VehiclesTable';
 
-function Customers() {
+function Vehicles() {
 	return (
 		<FusePageCarded
 			classes={{
@@ -12,11 +12,11 @@ function Customers() {
 				contentCard: 'overflow-hidden',
 				header: 'min-h-72 h-72 sm:h-136 sm:min-h-136'
 			}}
-			header={<CustomersHeader />}
-			content={<CustomersTable />}
+			header={<VehiclesHeader />}
+			content={<VehiclesTable />}
 			innerScroll
 		/>
 	);
 }
 
-export default withReducer('gas', reducer)(Customers);
+export default withReducer('gas', reducer)(Vehicles);

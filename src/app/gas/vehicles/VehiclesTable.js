@@ -15,48 +15,46 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import FuseLoading from '@fuse/core/FuseLoading';
-import { getCustomers, selectCustomers } from '../store/customersSlice';
-import CustomersTableHead from './CustomersTableHead';
+import { getVehicles, selectVehicles } from '../store/vehiclesSlice';
+import VehiclesTableHead from './VehiclesTableHead';
 
-function CustomersTable(props) {
+function VehiclesTable(props) {
 	const dispatch = useDispatch();
-	const customers = useSelector(selectCustomers);
-	const searchText = useSelector(({ gas }) => gas.customers.searchText);
+	const vehicles = useSelector(selectVehicles);
+	const searchText = useSelector(({ gas }) => gas.vehicles.searchText);
 
 	const [loading, setLoading] = useState(true);
 	const [selected, setSelected] = useState([]);
-	const [data, setData] = useState(customers);
+	const [data, setData] = useState(vehicles);
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
-	const [customer, setCustomer] = useState({
+	const [order, setOrder] = useState({
 		direction: 'asc',
 		id: null
 	});
 
 	useEffect(() => {
-		dispatch(getCustomers()).then(() => setLoading(false));
+		dispatch(getVehicles()).then(() => setLoading(false));
 	}, [dispatch]);
 
 	useEffect(() => {
 		if (searchText.length !== 0) {
-			//setData(_.filter(customers, item => item.full_name.toLowerCase().includes(searchText.toLowerCase())));
-			setData(customers);
+			setData(_.filter(vehicles, item => item.name.toLowerCase().includes(searchText.toLowerCase())));
 			setPage(0);
 		} else {
-		 
-			setData(customers);
+			setData(vehicles);
 		}
-	}, [customers, searchText]);
+	}, [vehicles, searchText]);
 
 	function handleRequestSort(event, property) {
 		const id = property;
 		let direction = 'desc';
 
-		if (customer.id === property && customer.direction === 'desc') {
+		if (order.id === property && order.direction === 'desc') {
 			direction = 'asc';
 		}
 
-		setCustomer({
+		setOrder({
 			direction,
 			id
 		});
@@ -75,11 +73,10 @@ function CustomersTable(props) {
 	}
 
 	function handleClick(item) {
-		props.history.push(`/customer/${item.id}`);
+		props.history.push(`/vehicle/${item.id}`);
 	}
 
 	function handleCheck(event, id) {
-		 
 		const selectedIndex = selected.indexOf(id);
 		let newSelected = [];
 
@@ -107,6 +104,7 @@ function CustomersTable(props) {
 	if (loading) {
 		return <FuseLoading />;
 	}
+
 	if (data.length === 0) {
 		return (
 			<motion.div
@@ -115,7 +113,7 @@ function CustomersTable(props) {
 				className="flex flex-1 items-center justify-center h-full"
 			>
 				<Typography color="textSecondary" variant="h5">
-					There are no customers!
+					There are no vehicles!
 				</Typography>
 			</motion.div>
 		);
@@ -125,9 +123,9 @@ function CustomersTable(props) {
 		<div className="w-full flex flex-col">
 			<FuseScrollbars className="flex-grow overflow-x-auto">
 				<Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
-					<CustomersTableHead
-						selectedCustomerIds={selected}
-						customer={customer}
+					<VehiclesTableHead
+						selectedVehicleIds={selected}
+						order={order}
 						onSelectAllClick={handleSelectAllClick}
 						onRequestSort={handleRequestSort}
 						rowCount={data.length}
@@ -138,9 +136,18 @@ function CustomersTable(props) {
 						{_.orderBy(
 							data,
 							[
-
+								o => {
+									switch (order.id) {
+										case 'categories': {
+											return o.categories[0];
+										}
+										default: {
+											return o[order.id];
+										}
+									}
+								}
 							],
-							[customer.direction]
+							[order.direction]
 						)
 							.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 							.map(n => {
@@ -164,16 +171,21 @@ function CustomersTable(props) {
 											/>
 										</TableCell>
 
+
 										<TableCell className="p-4 md:p-16" component="th" scope="row">
-											{n.full_name}
+											{n.name}
 										</TableCell>
 
-										<TableCell className="p-4 md:p-16" component="th" scope="row" align="right">
-											{n.is_active ? (
-												<Icon className="text-green text-20">check_circle</Icon>
-											) : (
-												<Icon className="text-red text-20">remove_circle</Icon>
-											)}
+										<TableCell className="p-4 md:p-16" component="th" scope="row">
+											{n.type}
+										</TableCell>
+
+										<TableCell className="p-4 md:p-16" component="th" scope="row">
+											{n.company.full_name}
+										</TableCell>
+
+										<TableCell className="p-4 md:p-16" component="th" scope="row">
+											{n.registered_date}
 										</TableCell>
 									</TableRow>
 								);
@@ -201,4 +213,4 @@ function CustomersTable(props) {
 	);
 }
 
-export default withRouter(CustomersTable);
+export default withRouter(VehiclesTable);

@@ -3,9 +3,7 @@ import { AccordionSummary, Accordion, Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
- 
 import { useDispatch, useSelector } from 'react-redux';
-
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import GoogleMap from 'google-map-react';
 import Typography from '@material-ui/core/Typography';
@@ -130,7 +128,7 @@ function AddressTab(props) {
 			</Button>
 {/**
  * 
- */}
+
 
  {customer.addresses.map((item) =>
   
@@ -161,7 +159,9 @@ function AddressTab(props) {
 							</div>
 						</AccordionDetails>
 					</Accordion>
+					
 )}
+ */}
 			
 		</div>
 	);
