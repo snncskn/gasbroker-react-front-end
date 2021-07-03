@@ -3,6 +3,7 @@ const locale = {
 	USERS: 'User',
 	CUSTOMERS:'Customers',
 	NEW_CUSTOMERS:'Customers',
+	VEHICLE:'Vehicles',
 
 };
 
