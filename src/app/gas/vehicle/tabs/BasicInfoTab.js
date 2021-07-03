@@ -9,17 +9,15 @@ import { useDispatch, useSelector } from 'react-redux';
 function BasicInfoTab(props) {
 	const dispatch = useDispatch();
 	const methods = useFormContext();
-	const { control, formState, watch } = methods;
+	const { control, formState, watch,setValue } = methods;
 	const { errors } = formState;
 	const company = watch('company');
-	const form = watch();
 
 	const [loading, setLoading] = useState(true);
 	const [customers, setCustomers] = useState({
 		direction: 'asc',
 		id: null
 	});
-	const [value, setValue] = useState('');
 
 	useEffect(() => {
 		dispatch(getCustomers()).then((data) => {
@@ -29,43 +27,52 @@ function BasicInfoTab(props) {
 		});
 	
 	}, [dispatch]);
+ 
 
 	return (
 		<div>
 
-			<Controller
+<Controller
 				name="company_id"
-				control={control}
-				render={({ field }) => (
+				control={control} 
+				render={({ field: { onChange, value } }) => (
 					<Autocomplete
-						{...field}
-						className="mt-8 mb-16"
-						freeSolo
-						defaultValue={company}
-						options={customers}
-						value={value}
-						getOptionLabel={label => {
+					className="mt-8 mb-16"
+					freeSolo
+					options={customers}
+					defaultValue={company.name}
+					getOptionLabel={label => {
+						if( label.name){
+
 							return label.name;
-						}}
-						onChange={(event, newValue) => {
-							setValue(newValue);
-						}}
-						renderInput={params => (
-							<TextField
-								{...params}
-								placeholder="Select company"
-								label="Company"
-								variant="outlined"
-								InputLabelProps={{
-									shrink: true
-								}}
-							/>
-						)}
-					/>
+						}else{
+							return label;
+
+						}
+					}}
+
+					onChange={(event, newValue) => {
+						console.log(newValue)
+						setValue(
+							'company_id',
+							newValue.id
+						);
+					}} 
+					renderInput={params => (
+						<TextField
+							{...params}
+							placeholder="Select company"
+							label="Company"
+
+							variant="outlined"
+							InputLabelProps={{
+								shrink: true
+							}}
+						/>
+					)}
+				/>
 				)}
 			/>
-
-
 			<Controller
 				name="name"
 				control={control}
@@ -91,9 +98,9 @@ function BasicInfoTab(props) {
 					<TextField
 						{...field}
 						className="mt-8 mb-16"
-						error={!!errors.name}
+						error={!!errors.type}
 						required
-						helperText={errors?.name?.message}
+						helperText={errors?.type?.message}
 						label="type"
 						autoFocus
 						id="type"
@@ -109,10 +116,10 @@ function BasicInfoTab(props) {
 					<TextField
 						{...field}
 						className="mt-8 mb-16"
-						error={!!errors.name}
+						error={!!errors.registered_date}
 						required
 						type="date"
-						helperText={errors?.name?.message}
+						helperText={errors?.registered_date?.message}
 						label="Registered Date"
 						autoFocus
 						id="registered_date"
