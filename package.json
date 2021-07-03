@@ -138,10 +138,10 @@
         "tailwindcss-dir": "4.0.0"
     },
     "lint-staged": {
-       "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-             "prettier --write"
-           ]
-       },
+        "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+            "prettier --write"
+        ]
+    },
     "scripts": {
         "start": "craco start  set API_URL=http://localhost:3300",
         "dev": "craco start .env.development",
