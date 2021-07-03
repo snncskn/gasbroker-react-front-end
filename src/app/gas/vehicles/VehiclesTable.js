@@ -181,7 +181,7 @@ function VehiclesTable(props) {
 										</TableCell>
 
 										<TableCell className="p-4 md:p-16" component="th" scope="row">
-											{n.company_id}
+											{n.company.full_name}
 										</TableCell>
 
 										<TableCell className="p-4 md:p-16" component="th" scope="row">

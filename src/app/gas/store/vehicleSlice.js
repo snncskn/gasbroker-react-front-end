@@ -13,7 +13,7 @@ export const removeVehicle = createAsyncThunk(
 	'gas/vehicle/removeProduct',
 	async (val, { dispatch, getState }) => {
 		const { id } = getState().gas.vehicle;
-		await axios.post('/api/e-commerce-app/remove-product', { id });
+		await axios.put(process.env.REACT_APP_API_URL + '/vehicle/delete/'+id, { id });
 
 		return id;
 	}
@@ -41,6 +41,7 @@ const vehicleSlice = createSlice({
 				payload: {
 					id: '',
 					company_id: '',
+					company: '',
 					name: '',
 					type: '',
 					registered_date: '',

@@ -17,8 +17,7 @@ import * as yup from 'yup';
 import { resetVehicle, newVehicle, getVehicle } from '../store/vehicleSlice';
 import reducer from '../store';
 import VehicleHeader from './VehicleHeader';
-import BasicInfoTab from './tabs/BasicInfoTab';
-import VehicleDocument from './tabs/VehicleDocument';
+import BasicInfoTab from './tabs/BasicInfoTab'; 
 
 /**
  * Form Validation Schema
@@ -139,28 +138,13 @@ function Vehicle(props) {
 					header: 'min-h-72 h-72 sm:h-136 sm:min-h-136'
 				}}
 				header={<VehicleHeader />}
-				contentToolbar={
-					<Tabs
-						value={tabValue}
-						onChange={handleTabChange}
-						indicatorColor="primary"
-						textColor="primary"
-						variant="scrollable"
-						scrollButtons="auto"
-						classes={{ root: 'w-full h-64' }}
-					>
-						{/* <Tab className="h-64" label="Basic Info" /> */}
-						{/* <Tab className="h-64" label="Vehicle Document" /> */}					</Tabs>
-				}
+				 
 				content={
 					<div className="p-16 sm:p-24 max-w-2xl">
 						<div className={tabValue !== 0 ? 'hidden' : ''}>
 							<BasicInfoTab />
 						</div>
-						{/* 
-						<div className={tabValue !== 1 ? 'hidden' : ''}>
-							<VehicleDocument />
-						</div> */}
+					 
 					</div>
 				}
 				innerScroll

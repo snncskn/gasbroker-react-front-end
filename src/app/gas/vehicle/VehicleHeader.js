@@ -28,7 +28,7 @@ function VehicleHeader(props) {
 
 	function handleRemoveVehicle() {
 		dispatch(removeVehicle()).then(() => {
-			history.push('/apps/e-commerce/products');
+			history.push('/vehicles');
 		});
 	}
 
@@ -40,7 +40,7 @@ function VehicleHeader(props) {
 						className="flex items-center sm:mb-12"
 						component={Link}
 						role="button"
-						to="/apps/e-commerce/products"
+						to="/vehicles"
 						color="inherit"
 					>
 						<Icon className="text-20">{theme.direction === 'ltr' ? 'arrow_back' : 'arrow_forward'}</Icon>

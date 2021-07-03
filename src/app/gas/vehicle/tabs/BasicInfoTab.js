@@ -9,8 +9,11 @@ import { useDispatch, useSelector } from 'react-redux';
 function BasicInfoTab(props) {
 	const dispatch = useDispatch();
 	const methods = useFormContext();
-	const { control, formState } = methods;
+	const { control, formState, watch } = methods;
 	const { errors } = formState;
+	const company = watch('company');
+	const form = watch();
+
 	const [loading, setLoading] = useState(true);
 	const [customers, setCustomers] = useState({
 		direction: 'asc',
@@ -23,10 +26,9 @@ function BasicInfoTab(props) {
 			setLoading(false);
 			setCustomers(data.payload);
 
-
 		});
+	
 	}, [dispatch]);
-
 
 	return (
 		<div>
@@ -39,14 +41,20 @@ function BasicInfoTab(props) {
 						{...field}
 						className="mt-8 mb-16"
 						freeSolo
+						defaultValue={company}
 						options={customers}
 						value={value}
 						getOptionLabel={label => {
-							return label.name;
+							if(!label.full_name){
+								return label;
+							}else{
+								return label.full_name;
+
+							}
 						}}
 
 						onChange={(event, newValue) => {
-							setValue(newValue.id);
+							setValue(newValue);
 						}}
 						renderInput={params => (
 							<TextField
@@ -63,6 +71,8 @@ function BasicInfoTab(props) {
 					/>
 				)}
 			/>
+
+
 			<Controller
 				name="name"
 				control={control}
