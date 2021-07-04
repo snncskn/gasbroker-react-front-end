@@ -63,7 +63,7 @@ function BasicInfoTab(props) {
 						}}
 
 						onChange={(event, newValue) => {
-							console.log(newValue)
+							 
 							setValue(
 								'company_id',
 								newValue.id
@@ -121,7 +121,6 @@ function BasicInfoTab(props) {
 						}}
 
 						onChange={(event, newValue) => {
-							console.log(newValue)
 							setValue(
 								'type',
 								newValue.name

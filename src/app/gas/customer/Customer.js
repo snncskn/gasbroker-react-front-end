@@ -60,7 +60,7 @@ function Customer(props) {
 			const { customerId } = routeParams;
 
 			if (customerId === 'new') {
-				let newCstmr = { name:'Empty',full_name:'Empty'};
+				let newCstmr = { name:'',full_name:'',addresses:[],types:[]};
 				dispatch(saveCustomer(newCstmr));
 				dispatch(newCustomer());
 			} else {
@@ -71,6 +71,13 @@ function Customer(props) {
 						setNoCustomer(true);
 					}
 				});
+				dispatch(getCustomer(routeParams)).then(action => {
+
+					if (!action.payload) {
+						setNoCustomer(true);
+					}
+				});
+
 			}
 		}
 

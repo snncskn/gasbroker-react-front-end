@@ -26,7 +26,11 @@ function CustomerHeader(props) {
 		});
 		 
 	}
-
+	function handleApprove() {
+	 alert('onaa gönder');
+		 
+	}
+	
 	function handleRemoveCustomer() {
 		dispatch(removeCustomer()).then(() => {
 			history.push('/customers');
@@ -68,6 +72,16 @@ function CustomerHeader(props) {
 				initial={{ opacity: 0, x: 20 }}
 				animate={{ opacity: 1, x: 0, transition: { delay: 0.3 } }}
 			>
+				<Button
+						className="whitespace-nowrap mx-4"
+						variant="contained"
+						color="secondary"
+						endIcon={<Icon>send</Icon>}
+						onClick={handleApprove}
+					 
+					>
+						Onaya Gönder
+				</Button>
 				<Button
 					className="whitespace-nowrap mx-4"
 					variant="contained"

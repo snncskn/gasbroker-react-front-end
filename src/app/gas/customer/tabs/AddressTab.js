@@ -127,7 +127,10 @@ function AddressTab(props) {
 			>
 				Add
 			</Button>
-			{customer.addresses.map((item) =>
+			{ customer.addresses ?
+			(
+				<div>
+					{customer.addresses.map((item) =>
 
 				<Accordion
 					className="shadow-0 border-0 overflow-hidden"
@@ -156,8 +159,10 @@ function AddressTab(props) {
 						</div>
 					</AccordionDetails>
 				</Accordion>
-
+				
 			)}
+			</div>)
+			:(<div>adres yok</div>)}
 
 
 		</div>

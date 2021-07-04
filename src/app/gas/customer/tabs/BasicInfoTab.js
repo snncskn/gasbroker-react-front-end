@@ -31,6 +31,7 @@ function BasicInfoTab(props) {
 	const [selectedDate, setSelectedDate] = useState(); 
 	const [types, setTypes] = useState(); 
 	const defaultTypes = watch('types');
+	
 
 	useEffect(() => {
 	 
@@ -106,13 +107,23 @@ function BasicInfoTab(props) {
 
 						onChange={(event, newValue) => {
 							console.log(newValue)
-							let tmp = [];
-							newValue.map(item=>{
-								tmp.push(item.name);
+							let tmpTypes = [];
+							let tmpMedia = [];
+							newValue.map(item => {
+								tmpTypes.push(item.name);
+								if(item.json_value){
+									item.json_value.docs.map(doc=>{
+										tmpMedia.push(doc.title);
+									});
+								}
 							})
 							setValue(
 								'types',
-								tmp
+								tmpTypes
+							);
+							setValue(
+								'media',
+								tmpMedia
 							);
 							 
 						}}
