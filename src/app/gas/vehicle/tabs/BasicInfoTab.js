@@ -53,8 +53,8 @@ function BasicInfoTab(props) {
 						options={customers}
 						defaultValue={company.name}
 						getOptionLabel={label => {
+							console.log(123);
 							if (label.name) {
-
 								return label.name;
 							} else {
 								return label;

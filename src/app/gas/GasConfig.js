@@ -12,7 +12,7 @@ const GasConfig = {
       component: lazy(() => import("./customer/Customer")),
     },
     {
-      path: "/customer",
+      path: "/customer/new",
       component: lazy(() => import("./customer/Customer")),
     },
     {

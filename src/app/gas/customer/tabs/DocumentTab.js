@@ -68,7 +68,7 @@ function DocumentTab(props) {
 				tmpData.map((item, index) => {
 					if (item.json_value) {
 						item.json_value.docs.map((it, i) => {
-							let tmp = { id: i, title: it.title, url: '' };
+							let tmp = { id: i, title: it.title, url: '/assets/images/icon/pdf.png' };
 							tmpAr.push(tmp);
 						})
 					}
@@ -158,6 +158,7 @@ function DocumentTab(props) {
 					defaultValue=""
 					render={({ field: { onChange, value } }) =>
 						documents.map(media => (
+							<div> 
 							<div
 								onClick={() => onChange(media.id)}
 								onKeyDown={() => onChange(media.id)}
@@ -170,7 +171,12 @@ function DocumentTab(props) {
 								)}
 								key={media.id}
 							>
-								<img className="max-w-none w-auto h-full" src={media.url} alt={media.title} />
+								<img width="90%" height="90%" className="max-w-none w-auto h-full" src={media.url} alt={media.title} />
+								{media.title} 
+								
+							</div>
+						 
+							
 							</div>
 						))
 					}
