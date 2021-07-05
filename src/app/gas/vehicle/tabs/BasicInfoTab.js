@@ -53,7 +53,6 @@ function BasicInfoTab(props) {
 						options={customers}
 						defaultValue={company.name}
 						getOptionLabel={label => {
-							console.log(123);
 							if (label.name) {
 								return label.name;
 							} else {
@@ -72,6 +71,7 @@ function BasicInfoTab(props) {
 						renderInput={params => (
 							<TextField
 								{...params}
+								required
 								placeholder="Select company"
 								label="Company"
 								variant="outlined"
@@ -109,10 +109,9 @@ function BasicInfoTab(props) {
 						className="mt-8 mb-16"
 						freeSolo
 						options={vehicleTypes}
-						defaultValue={type}
+						defaultValue={type ? type:""}
 						getOptionLabel={label => {
 							if (label.name) {
-
 								return label.name;
 							} else {
 								return label;

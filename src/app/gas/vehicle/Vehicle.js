@@ -27,6 +27,9 @@ const schema = yup.object().shape({
 		.string()
 		.required('You must enter a vehicle name')
 		.min(2, 'The vehicle name must be at least 2 characters'),
+	company_id: yup
+		.string()
+		.required('You must enter a company name'),
 	type: yup
 		.string(),
 	registered_date: yup
