@@ -15,7 +15,7 @@ export const removeProduct = createAsyncThunk('gas/product/removeProduct',
 	}
 );
 
-export const saveProduct = createAsyncThunk('gas/customer/saveProduct', async item => {
+export const saveProduct = createAsyncThunk('gas/product/saveProduct', async item => {
 	if (item.id) {
 		const response = await axios.put(process.env.REACT_APP_API_URL + '/product/' + item.id, item);
 		return await response.data.body;

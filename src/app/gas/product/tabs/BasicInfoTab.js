@@ -18,42 +18,26 @@ function BasicInfoTab(props) {
   });
   const [value, setValue] = useState(customers[0]);
 
-  useEffect(() => {
-    dispatch(getCustomers()).then((data) => {
-      setLoading(false);
-      setCustomers(data.payload);
-    });
-  }, [dispatch]);
+  useEffect(() => [dispatch]);
 
   return (
     <div>
       <Controller
-        name="company_id"
+        name="code"
         control={control}
         render={({ field }) => (
-          <Autocomplete
+          <TextField
             {...field}
             className="mt-8 mb-16"
-            freeSolo
-            options={customers}
-            value={value}
-            getOptionLabel={(label) => {
-              return label.name;
-            }}
-            onChange={(event, newValue) => {
-              setValue(newValue.id);
-            }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                placeholder="Select company"
-                label="Company"
-                variant="outlined"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            )}
+            error={!!errors.code}
+            required
+            helperText={errors?.code?.message}
+            label="Code"
+            autoFocus
+            translate="PRODUCT_CODE"
+            id="type"
+            variant="outlined"
+            fullWidth
           />
         )}
       />
@@ -70,24 +54,6 @@ function BasicInfoTab(props) {
             label="Name"
             autoFocus
             id="name"
-            variant="outlined"
-            fullWidth
-          />
-        )}
-      />
-      <Controller
-        name="type"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            className="mt-8 mb-16"
-            error={!!errors.name}
-            required
-            helperText={errors?.name?.message}
-            label="type"
-            autoFocus
-            id="type"
             variant="outlined"
             fullWidth
           />
