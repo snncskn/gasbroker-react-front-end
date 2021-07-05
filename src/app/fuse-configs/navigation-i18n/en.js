@@ -4,6 +4,7 @@ const locale = {
 	CUSTOMERS:'Customers',
 	NEW_CUSTOMERS:'Customers',
 	VEHICLE:'Vehicles',
+	PRODUCT:'Products',
 
 };
 

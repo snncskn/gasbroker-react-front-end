@@ -115,12 +115,17 @@ function JWTLoginTab(props) {
 					)}
 				/>
 
-				<Typography 
-				className="text-12 tracking-widest -mt-8 font-700"
-				color="textSecondary"
-				component={Link} to="/register">
-					Create new account
-				</Typography>
+				<div className="flex flex-col items-center justify-center pb-32">
+						<div>
+							<span className="font-normal mr-8">Don't have an account?</span>
+							<Link className="font-normal" to="/register">
+								Register
+							</Link>
+						</div>
+						<Link className="font-normal mt-8" to="/">
+							Back to Dashboard
+						</Link>
+				</div>
 
 				<Button
 					type="submit"

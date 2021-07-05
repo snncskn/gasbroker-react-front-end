@@ -13,10 +13,6 @@ const routes = [
 	// The individual route configs which has auth option won't be overridden.
 	...FuseUtils.generateRoutesFromConfigs(routeConfigs),
 	{
-		path: '/',
-		component: () => <Redirect to="/customers/" />
-	},
-	{
 		path: '/user',
 		component: () => <Redirect to="/user" />
 	},
@@ -35,6 +31,10 @@ const routes = [
 	{
 		path: '/products',
 		component: () => <Redirect to="/products" />
+	},
+	{
+		path: '/customers',
+		component: () => <Redirect to="/customers" />
 	}
 
 ];

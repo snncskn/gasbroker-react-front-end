@@ -109,8 +109,7 @@ function Login() {
 
 						<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.3 } }}>
 							<Typography variant="subtitle1" color="inherit" className="mt-32">
-							Powerful and professional system for Web Applications, CRM, CMS, Admin Panels
-								and more.
+							Powerful and professional system for Web Applications by <b>Navi Group</b>
 							</Typography>
 						</motion.div>
 					</div>

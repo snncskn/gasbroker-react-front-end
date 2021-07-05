@@ -34,7 +34,7 @@ const GasConfig = {
     {
       path: "/products",
       component: lazy(() => import("./products/Products")),
-    },
+    }
   ],
 };
 
