@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import history from '@history';
@@ -187,6 +187,11 @@ export const updateUserData = user => async (dispatch, getState) => {
 		}
 	}
 };
+
+export const saveUser = createAsyncThunk('gas/user/saveUser', async item => {
+		const response = await axios.post(process.env.REACT_APP_API_URL+'/user', item);
+		return await response.data.body;
+});
 
 const initialState = {
 	role: [], // guest

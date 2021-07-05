@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { submitLogin } from 'app/auth/store/loginSlice';
 import * as yup from 'yup';
 import _ from '@lodash';
+import { Link } from 'react-router-dom';
 
 /**
  * Form Validation Schema
@@ -113,6 +114,13 @@ function JWTLoginTab(props) {
 						/>
 					)}
 				/>
+
+				<Typography 
+				className="text-12 tracking-widest -mt-8 font-700"
+				color="textSecondary"
+				component={Link} to="/register">
+					Create new account
+				</Typography>
 
 				<Button
 					type="submit"

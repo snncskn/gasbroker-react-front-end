@@ -80,7 +80,7 @@ function Login() {
 						<JWTLoginTab />											</CardContent>
 
 
-	{/**
+	{/**component={Link} to="/login"
 					<div className="flex flex-col items-center justify-center pb-32">
 						<div>
 							<span className="font-normal mr-8">Don't have an account?</span>
