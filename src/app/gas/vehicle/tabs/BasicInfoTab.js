@@ -61,7 +61,6 @@ function BasicInfoTab(props) {
 
 							}
 						}}
-
 						onChange={(event, newValue) => {
 							 
 							setValue(
