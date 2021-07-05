@@ -9,8 +9,8 @@ export const getCustomer = createAsyncThunk('gas/customer/getCustomer', async pa
 });
 
 export const saveCustomer = createAsyncThunk('gas/customer/saveCustomer', async item => {
-	if(item.company_id){
-		const response = await axios.put(process.env.REACT_APP_API_URL+'/company/'+item.company_id, item);
+	if(item.id){
+		const response = await axios.put(process.env.REACT_APP_API_URL+'/company/'+item.id, item);
 		return await response.data.body;
 	}else{
 		const response = await axios.post(process.env.REACT_APP_API_URL+'/company', item);
@@ -23,7 +23,7 @@ export const saveCustomer = createAsyncThunk('gas/customer/saveCustomer', async 
 export const addAddressCustomer = createAsyncThunk('gas/customer/addAddressCustomer', 
 					async (item,{ dispatch, getState }) => {
 	if(item.address_id){
-		const response = await axios.put(process.env.REACT_APP_API_URL+'/address/'+item.company_id, item);
+		const response = await axios.put(process.env.REACT_APP_API_URL+'/address/'+item.id, item);
 		return await response.data.body;
 	}else{ 
 		const response = await axios.post(process.env.REACT_APP_API_URL+'/address', item);
@@ -35,12 +35,27 @@ export const removeCustomer = createAsyncThunk(
 	'gas/customer/removeCustomer',
 	async (val, { dispatch, getState }) => {
 		 
-		const { company_id } = getState().gas.customer;
-		await axios.delete(process.env.REACT_APP_API_URL+'/company/delete/'+company_id);
+		const { id } = getState().gas.customer;
+		await axios.put(process.env.REACT_APP_API_URL+'/company/delete/'+id);
 
-		return company_id;
+		return id;
 	}
 );
+
+export const getType = createAsyncThunk('gas/company/type', async () => {
+	const response = await axios.get(process.env.REACT_APP_API_URL + '/parameter/category/COMPANY_TYPE');
+	const data = await response.data.body;
+
+	return data === undefined ? null : data;;
+});
+
+export const getDocumentByTypes = createAsyncThunk('gas/company/parametersByTypes', async (types) => {
+	console.log(types);
+	const response = await axios.post(process.env.REACT_APP_API_URL + '/parameter/parametersByTypes',{types:types});
+	const data = await response.data.body;
+
+	return data === undefined ? null : data;;
+});
 
 const customerSlice = createSlice({
 	name: 'gas/customer',

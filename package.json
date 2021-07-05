@@ -143,7 +143,7 @@
         ]
     },
     "scripts": {
-        "start": "craco start  set API_URL=http://localhost:3300",
+        "start": "craco start set API_URL=http://localhost:3300",
         "dev": "craco start .env.development",
         "build": "cross-env GENERATE_SOURCEMAP=false craco build",
         "test": "craco test --env=node",

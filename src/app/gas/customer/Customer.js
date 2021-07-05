@@ -37,14 +37,6 @@ const schema = yup.object().shape({
 		.string()
 		.required('You must enter the company name')
 		.min(5, 'The company name must be at least 5 characters'),
-	description: yup
-		.string()
-		.required('You must enter a company name')
-		.min(5, 'The company name must be at least 5 characters'),
-	companyType: yup
-		.string()
-		.required('You must select a company type'),
-	
 		
 });
 
@@ -68,7 +60,7 @@ function Customer(props) {
 			const { customerId } = routeParams;
 
 			if (customerId === 'new') {
-				let newCstmr = { name:'Empty',full_name:'Empty'};
+				let newCstmr = { name:'',full_name:'',addresses:[],types:[]};
 				dispatch(saveCustomer(newCstmr));
 				dispatch(newCustomer());
 			} else {
@@ -79,6 +71,13 @@ function Customer(props) {
 						setNoCustomer(true);
 					}
 				});
+				dispatch(getCustomer(routeParams)).then(action => {
+
+					if (!action.payload) {
+						setNoCustomer(true);
+					}
+				});
+
 			}
 		}
 

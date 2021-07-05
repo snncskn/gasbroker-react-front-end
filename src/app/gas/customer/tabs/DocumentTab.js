@@ -1,11 +1,85 @@
 import { TextField, InputAdornment, Button, Icon } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
+import { getDocumentByTypes } from 'app/gas/store/customerSlice';
+import { useEffect, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import { orange } from '@material-ui/core/colors';
+import FuseUtils from '@fuse/utils';
+
+
+const useStyles = makeStyles(theme => ({
+	productImageFeaturedStar: {
+		position: 'absolute',
+		top: 0,
+		right: 0,
+		color: orange[400],
+		opacity: 0
+	},
+	productImageUpload: {
+		transitionProperty: 'box-shadow',
+		transitionDuration: theme.transitions.duration.short,
+		transitionTimingFunction: theme.transitions.easing.easeInOut
+	},
+	productImageItem: {
+		transitionProperty: 'box-shadow',
+		transitionDuration: theme.transitions.duration.short,
+		transitionTimingFunction: theme.transitions.easing.easeInOut,
+		'&:hover': {
+			'& $productImageFeaturedStar': {
+				opacity: 0.8
+			}
+		},
+		'&.featured': {
+			pointerEvents: 'none',
+			boxShadow: theme.shadows[3],
+			'& $productImageFeaturedStar': {
+				opacity: 1
+			},
+			'&:hover $productImageFeaturedStar': {
+				opacity: 1
+			}
+		}
+	}
+}));
+
 
 function DocumentTab(props) {
+	const dispatch = useDispatch();
+	const classes = useStyles(props);
+
 	const methods = useFormContext();
-	const { control } = methods;
+	const { control, watch } = methods;
+	const media = watch('media');
+	const types = watch('types');
+	console.log(media);
+	const [documents, setDocuments] = useState([]);
+
+
+	useEffect(() => {
+		dispatch(getDocumentByTypes(types)).then(action => {
+			if (action.payload) {
+				const tmpData = action.payload;
+				console.log(documents)
+				const tmpAr = [];
+				tmpData.map((item, index) => {
+					if (item.json_value) {
+						item.json_value.docs.map((it, i) => {
+							let tmp = { id: i, title: it.title, url: '/assets/images/icon/pdf.png' };
+							tmpAr.push(tmp);
+						})
+					}
+				});
+				setDocuments(...documents, tmpAr);
+
+			}
+		});
+
+	}, [dispatch]);
+
 	const columns = [
 		{
 			field: 'id',
@@ -16,70 +90,100 @@ function DocumentTab(props) {
 
 		},
 		{
-			field: 'fileName',
+			field: 'title',
 			headerName: 'File Name',
 			flex: 1,
 			editable: true,
 		}
 	];
 
-	const rows = [
-		{ id: 1, fileName: 'file1asdadasdasdasdasd' },
-		{ id: 2, fileName: 'file2' },
-		{ id: 3, fileName: 'file3' },
-	];
-	return (
-		<div style={{ width: '100 % ' }}>
-			<Controller
-				name="upload_file"
-				control={control}
-				render={({ field }) => (
-					<Button
-						{...field}
-						id="upload_file"
-						variant="contained"
-						color="default"
-						startIcon={<AttachFileIcon />}
-					>
-						Evrak yükle
-					</Button>
-				)}
-			/>
-			<Controller
-				name="files"
-				control={control}
-				render={({ field }) => (
-					<DataGrid
-						{...field}
-						id="files"
-						aria-label="Files"
-						rows={rows}
-						columns={columns}
-						autoHeight={true}
-						autoPageSize={true}
-						checkboxSelection
-						disableSelectionOnClick
-					/>
-				)}
-			/>
 
-			<Controller
-				name="files"
-				control={control}
-				render={({ field }) => (
-					<Button
-						{...field}
-						variant="contained"
-						color="primary"
-						endIcon={<Icon>send</Icon>}
-						fullWidth
-					>
-						Onaya Gönder
-					</Button>
-				)}
-			/>
-		</div >
-	);
+	return (
+		<div>
+			<div className="flex justify-center sm:justify-start flex-wrap -mx-16">
+				<Controller
+					name="images"
+					control={control}
+					defaultValue={[]}
+					render={({ field: { onChange, value } }) => (
+						<label
+							htmlFor="button-file"
+							className={clsx(
+								classes.productImageUpload,
+								'flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer shadow hover:shadow-lg'
+							)}
+						>
+							<input
+								accept="image/*"
+								className="hidden"
+								id="button-file"
+								type="file"
+								onChange={async e => {
+									function readFileAsync() {
+										return new Promise((resolve, reject) => {
+											const file = e.target.files[0];
+											if (!file) {
+												return;
+											}
+											const reader = new FileReader();
+
+											reader.onload = () => {
+												resolve({
+													id: FuseUtils.generateGUID(),
+													url: `data:${file.type};base64,${btoa(reader.result)}`,
+													type: 'image'
+												});
+											};
+
+											reader.onerror = reject;
+
+											reader.readAsBinaryString(file);
+										});
+									}
+
+									const newImage = await readFileAsync();
+
+									onChange([newImage, ...value]);
+								}}
+							/>
+							<Icon fontSize="large" color="action">
+								cloud_upload
+							</Icon>
+						</label>
+					)}
+				/>
+				<Controller
+					name="featuredImageId"
+					control={control}
+					defaultValue=""
+					render={({ field: { onChange, value } }) =>
+						documents.map(media => (
+							<div> 
+							<div
+								onClick={() => onChange(media.id)}
+								onKeyDown={() => onChange(media.id)}
+								role="button"
+								tabIndex={0}
+								className={clsx(
+									classes.productImageItem,
+									'flex items-center justify-center relative w-128 h-128 rounded-16 mx-12 mb-24 overflow-hidden cursor-pointer outline-none shadow hover:shadow-lg',
+									media.id === value && 'featured'
+								)}
+								key={media.id}
+							>
+								<img width="90%" height="90%" className="max-w-none w-auto h-full" src={media.url} alt={media.title} />
+								{media.title} 
+								
+							</div>
+						 
+							
+							</div>
+						))
+					}
+				/>
+			</div >
+			</div >
+			);
 }
 
 export default DocumentTab;

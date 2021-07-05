@@ -53,8 +53,8 @@ function BasicInfoTab(props) {
 						options={customers}
 						defaultValue={company.name}
 						getOptionLabel={label => {
+							console.log(123);
 							if (label.name) {
-
 								return label.name;
 							} else {
 								return label;
@@ -63,7 +63,7 @@ function BasicInfoTab(props) {
 						}}
 
 						onChange={(event, newValue) => {
-							console.log(newValue)
+							 
 							setValue(
 								'company_id',
 								newValue.id
@@ -74,7 +74,6 @@ function BasicInfoTab(props) {
 								{...params}
 								placeholder="Select company"
 								label="Company"
-
 								variant="outlined"
 								InputLabelProps={{
 									shrink: true
@@ -122,7 +121,6 @@ function BasicInfoTab(props) {
 						}}
 
 						onChange={(event, newValue) => {
-							console.log(newValue)
 							setValue(
 								'type',
 								newValue.name
