@@ -3,8 +3,9 @@ import FuseUtils from '@fuse/utils';
 import UserConfig from 'app/gas/auth/UserConfig';
 import GasConfig from 'app/gas/GasConfig';
 import LoginConfig from 'app/main/login/LoginConfig';
+import RegisterConfig from 'app/main/register/RegisterConfig';
 
-const routeConfigs = [UserConfig, GasConfig, LoginConfig];
+const routeConfigs = [UserConfig, GasConfig, LoginConfig, RegisterConfig];
 
 const routes = [
 	// if you want to make whole app auth protected by default change defaultAuth for example:
