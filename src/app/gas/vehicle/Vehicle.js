@@ -25,8 +25,7 @@ import BasicInfoTab from './tabs/BasicInfoTab';
 const schema = yup.object().shape({
 	name: yup
 		.string()
-		.required('You must enter a vehicle name')
-		.min(2, 'The vehicle name must be at least 2 characters'),
+		.required('You must enter a vehicle name'),
 	type: yup
 		.string(),
 	registered_date: yup

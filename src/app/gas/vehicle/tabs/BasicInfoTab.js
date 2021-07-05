@@ -44,25 +44,21 @@ function BasicInfoTab(props) {
 		<div>
 
 			<Controller
-				name="company_id"
+				name="company"
 				control={control}
-				render={({ field: { onChange, value } }) => (
+				render={({ field }) => (
 					<Autocomplete
 						className="mt-8 mb-16"
 						freeSolo
 						options={customers}
-						defaultValue={company.name}
-						getOptionLabel={label => {
-							console.log(123);
-							if (label.name) {
-								return label.name;
-							} else {
-								return label;
-
+						getOptionLabel={(option) => {
+							if (option.hasOwnProperty('name')) {
+								return option.name;
 							}
+							return option;
 						}}
+						// getOptionSelected={(option) => option.id === company.id}
 						onChange={(event, newValue) => {
-							 
 							setValue(
 								'company_id',
 								newValue.id
@@ -79,6 +75,7 @@ function BasicInfoTab(props) {
 								}}
 							/>
 						)}
+						{...field}
 					/>
 				)}
 			/>
