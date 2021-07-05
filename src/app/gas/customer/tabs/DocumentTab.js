@@ -143,7 +143,7 @@ function DocumentTab(props) {
 
 									const newImage = await readFileAsync();
 
-									onChange([newImage, ...value]);
+								// Update	onChange([newImage, ...value]);
 								}}
 							/>
 							<Icon fontSize="large" color="action">
