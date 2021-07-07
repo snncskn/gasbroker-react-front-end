@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ProductsSidebarContent(props) {
-	const product = useSelector(({ gas }) => gas.product);
+	// const product = useSelector(({ gas }) => gas.product);	
 
 	const dispatch = useDispatch();
 
@@ -58,12 +58,12 @@ function ProductsSidebarContent(props) {
 				animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
 				className="rounded-0 shadow-none lg:rounded-16 lg:shadow"
 			>
-				<div className="p-24 flex items-center">
+				{/* <div className="p-24 flex items-center">
 					<Avatar alt={product?.name} src="" />
 					<Typography className="mx-12">{product?.name}</Typography>
 				</div>
 
-				<Divider />
+				<Divider /> */}
 
 				<div className="p-24">
 					<Button
@@ -121,4 +121,5 @@ function ProductsSidebarContent(props) {
 	);
 }
 
-export default withReducer('gas', reducer)(ProductsSidebarContent);
+// export default withReducer('gas', reducer)(ProductsSidebarContent);
+export default ProductsSidebarContent;

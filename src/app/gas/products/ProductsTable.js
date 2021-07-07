@@ -2,6 +2,7 @@ import FuseScrollbars from "@fuse/core/FuseScrollbars";
 import _ from "@lodash";
 import Checkbox from "@material-ui/core/Checkbox";
 import Icon from "@material-ui/core/Icon";
+import IconButton from '@material-ui/core/IconButton';
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -16,6 +17,7 @@ import { withRouter } from "react-router-dom";
 import FuseLoading from "@fuse/core/FuseLoading";
 import { getProducts, selectProducts } from "../store/productsSlice";
 import ProductsTableHead from "./ProductsTableHead";
+import { removeProduct } from "../store/productSlice";
 
 function ProductsTable(props) {
   const dispatch = useDispatch();
@@ -77,6 +79,12 @@ function ProductsTable(props) {
 
   function handleClick(item) {
     props.history.push(`/product/${item.id}`);
+  }
+
+  function handleRemoveProduct() {
+    dispatch(removeProduct()).then(() => {
+      props.history.push('/products');
+    });
   }
 
   function handleCheck(event, id) {
@@ -165,7 +173,7 @@ function ProductsTable(props) {
                     role="checkbox"
                     aria-checked={isSelected}
                     tabIndex={-1}
-                    key={n.id}
+                    key={n.name}
                     selected={isSelected}
                     onClick={(event) => handleClick(n)}
                   >
@@ -193,7 +201,7 @@ function ProductsTable(props) {
                       component="th"
                       scope="row"
                     >
-                      {n.type}
+                      {n.code}
                     </TableCell>
 
                     <TableCell
@@ -201,7 +209,7 @@ function ProductsTable(props) {
                       component="th"
                       scope="row"
                     >
-                      {n.company_id}
+                      {n.created_at}
                     </TableCell>
 
                     <TableCell
@@ -209,8 +217,21 @@ function ProductsTable(props) {
                       component="th"
                       scope="row"
                     >
-                      {n.registered_date}
+
+                      <IconButton
+                        onClick={handleClick}
+                      >
+                        <Icon>edit</Icon>
+                      </IconButton>
+
+                      <IconButton
+                        onClick={handleRemoveProduct}
+                      >
+                        <Icon>delete</Icon>
+                      </IconButton>
+
                     </TableCell>
+
                   </TableRow>
                 );
               })}

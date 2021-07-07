@@ -19,32 +19,29 @@ import { removeProducts } from '../store/productsSlice';
 
 const rows = [
 	{
-		id: 'name',
+		id: 'transaction_type',
 		align: 'left',
 		disablePadding: false,
-		label: 'Name',
+		label: 'İşlem Türü',
 		sort: true,
 	},
 	{
-		id: 'type',
+		id: 'quantity',
 		align: 'left',
 		disablePadding: false,
-		label: 'Type',
+		label: 'Ürün Miktarı',
 		sort: true,
 	},
 	{
-		id: 'company',
+		id: 'unit',
 		align: 'left',
 		disablePadding: false,
-		label: 'Company',
+		label: 'Ürün Birimi',
 		sort: true,
 	},
 	{
-		id: 'registered_date',
+		id: 'actions',
 		align: 'left',
-		disablePadding: false,
-		label: 'Registered Date',
-		sort: true,
 	}
 ];
 
@@ -78,13 +75,13 @@ function ProductsTableHead(props) {
 	return (
 		<TableHead>
 			<TableRow className="h-48 sm:h-64">
-				<TableCell padding="none" className="w-40 md:w-64 text-center z-99">
+				<TableCell padding='none' className="w-40 md:w-64 text-center z-99">
 					<Checkbox
 						indeterminate={numSelected > 0 && numSelected < props.rowCount}
 						checked={props.rowCount !== 0 && numSelected === props.rowCount}
 						onChange={props.onSelectAllClick}
 					/>
-					{numSelected > 0 && (
+					{/* {numSelected > 0 && (
 						<div
 							className={clsx(
 								'flex items-center justify-center absolute w-64 top-0 ltr:left-0 rtl:right-0 mx-56 h-64 z-10 border-b-1',
@@ -120,7 +117,7 @@ function ProductsTableHead(props) {
 								</MenuList>
 							</Menu>
 						</div>
-					)}
+					)} */}
 				</TableCell>
 				{rows.map(row => {
 					return (

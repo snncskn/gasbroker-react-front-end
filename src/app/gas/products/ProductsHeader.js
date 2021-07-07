@@ -62,7 +62,7 @@ function ProductsHeader(props) {
 				</ThemeProvider>
 			</div>
 			<motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0, transition: { delay: 0.2 } }}>
-				<Button
+				{/* <Button
 					component={Link}
 					to="/product/new"
 					className="whitespace-nowrap"
@@ -71,7 +71,7 @@ function ProductsHeader(props) {
 				>
 					<span className="hidden sm:flex">Add New Product</span>
 					<span className="flex sm:hidden">New</span>
-				</Button>
+				</Button> */}
 			</motion.div>
 		</div>
 	);
