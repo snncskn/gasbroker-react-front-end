@@ -24,22 +24,71 @@ export const { selectAll: selectProducts, selectById: selectProductById } = prod
 const productsSlice = createSlice({
 	name: 'gas/products',
 	initialState: productsAdapter.getInitialState({
-		searchText: ''
+		searchText: '', productDialog: {
+			type: 'new',
+			props: {
+				open: false
+			},
+			data: null
+		}
 	}),
+
 	reducers: {
 		setProductsSearchText: {
 			reducer: (state, action) => {
 				state.searchText = action.payload;
 			},
 			prepare: event => ({ payload: event.target.value || '' })
+		},
+		openNewProductDialog: (state, action) => {
+			state.productDialog = {
+				type: 'new',
+				props: {
+					open: true
+				},
+				data: null
+			};
+		},
+		closeNewProductDialog: (state, action) => {
+			state.productDialog = {
+				type: 'new',
+				props: {
+					open: false
+				},
+				data: null
+			};
+		},
+		openEditProductDialog: (state, action) => {
+			state.productDialog = {
+				type: 'edit',
+				props: {
+					open: true
+				},
+				data: action.payload
+			};
+		},
+		closeEditProductDialog: (state, action) => {
+			state.productDialog = {
+				type: 'edit',
+				props: {
+					open: false
+				},
+				data: null
+			};
 		}
 	},
 	extraReducers: {
 		[getProducts.fulfilled]: productsAdapter.setAll,
-		[removeProducts.fulfilled]: (state, action) => productsAdapter.removeMany(state, action.payload)
+		[removeProducts.fulfilled]: (state, action) => productsAdapter.removeMany(state, action.payload),
 	}
 });
 
-export const { setProductsSearchText } = productsSlice.actions;
+export const {
+	setProductsSearchText,
+	openNewProductDialog,
+	closeNewProductDialog,
+	openEditProductDialog,
+	closeEditProductDialog
+} = productsSlice.actions;
 
 export default productsSlice.reducer;

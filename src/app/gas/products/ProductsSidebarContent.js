@@ -14,6 +14,7 @@ import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import reducer from '../store';
+import { openNewProductDialog } from '../store/productsSlice';
 // import { openNewContactDialog } from './store/contactsSlice';
 
 const useStyles = makeStyles(theme => ({
@@ -67,12 +68,10 @@ function ProductsSidebarContent(props) {
 
 				<div className="p-24">
 					<Button
-						component={Link}
 						variant="contained"
 						color="secondary"
 						className="w-full"
-						to="/product/new"
-					// onClick={ev => dispatch(openNewContactDialog())}
+						onClick={ev => dispatch(openNewProductDialog())}
 					>
 						Add New Product
 					</Button>
