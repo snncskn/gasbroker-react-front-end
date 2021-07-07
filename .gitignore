@@ -103,3 +103,7 @@ typings/
 .tern-port
 
 .history
+
+package.json
+.env.local
+.env.development
